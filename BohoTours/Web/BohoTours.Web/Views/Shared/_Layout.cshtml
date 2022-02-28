@@ -1,0 +1,195 @@
+﻿@using BohoTours.Common
+@using Microsoft.AspNetCore.Identity
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-default navbar-expand-lg navbar-light">
+            <div class="navbar-header">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><i class="fa fa-map" style="color: #31bfb1"></i> Boho<b>Tours</b></a>
+                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collection of nav links, forms, and other content for toggling -->
+            <div id="navbarCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Offers</a></li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Destinations <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Europe</a></li>
+                            <li><a href="#">Asia</a></li>
+                            <li><a href="#">South America</a></li>
+                            <li><a href="#">North America</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Hotels</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <form class="navbar-form form-inline">
+                    <div class="input-group search-box">
+                        <input type="text" id="search" class="form-control" placeholder="Search here...">
+                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (!this.User.Identity.IsAuthenticated)
+                    {
+
+                        <li>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-user"> Login</i></a>
+                            <ul class="dropdown-menu form-wrapper">
+                                <li>
+                                    <form asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Home/Index" method="post">
+                                        <p class="hint-text">Sign in with your social media account</p>
+                                        <div class="form-group social-btn clearfix">
+                                            <a href="#" class="btn btn-primary pull-left"><i class="fa fa-facebook"></i> Facebook</a>
+                                            <a href="#" class="btn btn-info pull-right"><i class="fa fa-twitter"></i> Twitter</a>
+                                        </div>
+                                        <div class="or-seperator"><b>or</b></div>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="Username" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+                                        </div>
+                                        <input type="submit" class="btn btn-primary btn-block" value="Login">
+                                        <div class="form-footer">
+                                            <a href="#">Forgot Your password?</a>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" id="signIn" data-toggle="dropdown" class="btn btn-primary dropdown-toggle get-started-btn mt-1 mb-1"><i class="fa fa-id-card"> Sign up</i></a>
+                            <ul class="dropdown-menu form-wrapper">
+                                <li>
+                                    <form asp-area="Identity" asp-page="/Account/Register" asp-route-returnUrl="/Home/Index" method="post">
+                                        <p class="hint-text">Fill in this form to create your account!</p>
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="Username" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="confirmPassword" class="form-control" placeholder="Confirm Password" required="required">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary btn-block" value="Sign up">
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> @User.Identity.Name<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="fa fa-user-o"></i> Profile</a></li>
+                                <li><a href="#"><i class="fa fa-calendar-o"></i> Calendar</a></li>
+                                <li><a href="#"><i class="fa fa-sliders"></i> Settings</a></li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:{}" onclick="document.getElementById('logout').submit(); return false;"><i class="material-icons">&#xE8AC;</i> Logout</a>
+                                    <form id="logout" class="form-inline dropdown-toggle" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
+                                    </form>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+
+                    }
+                </ul>
+
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @this.RenderBody()
+        </main>
+        <footer class="navbar navbar-default navbar-footer navbar-expand-lg navbar-light">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4>About us</h4>
+                            <p>
+                                We are a young company always looking for new and creative ideas to help you with our products in your everyday work.
+                            </p>
+                            <p>© Company Inc.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Contact</h4>
+                            <p><i class="fas fa-map-marker-alt" style="color: #31bfb1"></i> Via Rossini 10, 10136 Turin Italy</p>
+                            <p><i class="fas fa-phone" style="color: #31bfb1"></i> Phone: (0039) 333 12 68 347</p>
+                            <p><i class="fas fa-envelope" style="color: #31bfb1"></i> Email: <a href="mailto:hello@domain.com">hello@domain.com</a></p>
+                            <p><i class="fab fa-skype" style="color: #31bfb1"></i> Skype: you_online</p>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <h4>Links</h4>
+                                    <p><a href="#">Home</a></p>
+                                    <p><a href="#">Features</a></p>
+                                    <p><a href="#">How it works</a></p>
+                                    <p><a href="#">Our clients</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-social col-10">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/e3daaa3d52.js" crossorigin="anonymous"></script>
+    @await this.RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-BohoTours-BBB373B5-EF3F-4DBB-B8AA-7152CEC275BF</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bootstrap.v3.Datetimepicker" Version="4.17.49" />
+    <PackageReference Include="Bootstrap.v3.Datetimepicker.CSS" Version="4.17.49" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.161" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.312" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BohoTours.Common\BohoTours.Common.csproj" />
+    <ProjectReference Include="..\..\Data\BohoTours.Data.Models\BohoTours.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\BohoTours.Data\BohoTours.Data.csproj" />
+    <ProjectReference Include="..\..\Services\BohoTours.Services.Data\BohoTours.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\BohoTours.Services.Mapping\BohoTours.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\BohoTours.Services.Messaging\BohoTours.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\BohoTours.Services\BohoTours.Services.csproj" />
+    <ProjectReference Include="..\BohoTours.Web.Infrastructure\BohoTours.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\BohoTours.Web.ViewModels\BohoTours.Web.ViewModels.csproj" />
+  </ItemGroup>
+</Project>
