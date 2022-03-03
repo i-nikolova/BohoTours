@@ -487,4 +487,14 @@ li > a:focus {
     }
 .submit-btn:hover {
             background-color: #c66995;
-        } 
+        }
+
+.card-columns {
+@include media-breakpoint-only(lg) {
+    column-count: 4;
+}
+
+@include media-breakpoint-only(xl) {
+    column-count: 5;
+}
+}

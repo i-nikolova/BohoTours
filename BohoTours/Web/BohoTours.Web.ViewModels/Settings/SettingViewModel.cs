@@ -1,9 +1,8 @@
 ﻿namespace BohoTours.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

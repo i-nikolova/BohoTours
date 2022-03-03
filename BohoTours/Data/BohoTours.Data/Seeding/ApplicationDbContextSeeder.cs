@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using BohoTours.Data.Scraping;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
@@ -27,6 +28,8 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new ContinentsSeeder(),
+                              new ScrapingSeeder(),
                           };
 
             foreach (var seeder in seeders)

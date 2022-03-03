@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using BohoTours.Services.Data.Hotels;
 
 namespace BohoTours.Web
 {
@@ -67,6 +67,9 @@ namespace BohoTours.Web
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IHotelsService, HotelsService>();
+            services.AddTransient<AngleSharp.Html.Parser.HtmlParser>();
+            services.AddTransient<System.Net.Http.HttpClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
