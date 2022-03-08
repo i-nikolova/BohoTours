@@ -4,28 +4,12 @@
 }
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Gideon+Roman&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="~/css/templatemo-style.css" />
 <link rel="stylesheet" href="~/slick/slick.css" />
 <link rel="stylesheet" href="~/slick/slick-theme.css" />
 
-<style>
-    h1 {
-        font-family: 'Great Vibes', cursive;
-        color: #31bfb1;
-        font-size: 80px;
-        text-shadow: 2px 2px 0px rgb(85 85 85);
-    }
 
-    h2 {
-        font-family: 'Great Vibes', cursive;
-        color: #31bfb1;
-        font-size: 50px;
-        text-shadow: 2px 2px 0px rgb(85 85 85);
-    }
-</style>
-<div class="text-center">
+<div class="text-center m-2">
     <h1>Your Journey Begins </h1>
     <p style="color: #5D6362; font-family: 'Gideon Roman', cursive; font-weight: bold ">It's better to see something once then to hear about its thousand times.</p>
 </div>
@@ -33,49 +17,53 @@
 <div id="booking">
     <div class="booking-form">
         <form>
-            <div class="col-md-8">
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Enter Address, zip, city or airport">
-                    <span class="form-label">Destination</span>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Enter Address, zip, city or airport">
+                        <span class="form-label">Destination</span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                        <span class="form-label">Guests</span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                        <span class="select-arrow"></span>
+                        <span class="form-label">Children</span>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                    <span class="form-label">Guests</span>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="date" required="">
+                        <span class="form-label">Check In</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <select class="form-control">
-                        <option>0</option>
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
-                    <span class="select-arrow"></span>
-                    <span class="form-label">Children</span>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input class="form-control" type="date" required="">
+                        <span class="form-label">Check out</span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input class="form-control" type="date" required="">
-                    <span class="form-label">Check In</span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input class="form-control" type="date" required="">
-                    <span class="form-label">Check out</span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-btn">
-                    <button class="submit-btn">Check availability</button>
+                <div class="col-md-4">
+                    <div class="form-btn">
+                        <button class="submit-btn">Check availability</button>
+                    </div>
                 </div>
             </div>
         </form>

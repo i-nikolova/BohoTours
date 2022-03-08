@@ -113,6 +113,7 @@ Highlight color (pink)		: #c66995
 
     .tm-tab-link:hover {
         color: white;
+        text-decoration: none !important;
     }
 .tm-tab-link-li {
     background: transparent;
@@ -125,8 +126,9 @@ Highlight color (pink)		: #c66995
 
 .tm-tab-link-li a {
         padding: 22px 80px !important;
-    font-size: 12px;
+    font-size: 13px;
         font-weight: 400;
+
     }
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:focus, 

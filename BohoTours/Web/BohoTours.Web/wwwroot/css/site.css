@@ -28,9 +28,8 @@
 
 .nav img {
     border-radius: 50%;
-    margin: -8px 0;
+    margin: 0px 5px;
     float: left;
-    margin-right: 10px;
 }
 
 .navbar .navbar-brand, .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
@@ -381,7 +380,7 @@ li > a:focus {
 
 .booking-form {
     background: #fff;
-    padding: 30px 15px 0px;
+    padding: 30px 20px 0px;
     border-radius: 4px;
     overflow: auto;
 }
@@ -489,12 +488,49 @@ li > a:focus {
             background-color: #c66995;
         }
 
-.card-columns {
-@include media-breakpoint-only(lg) {
-    column-count: 4;
+.card-img-top {
+    max-height: 200px;
+    min-height: 150px;
+    object-fit: cover;
 }
 
-@include media-breakpoint-only(xl) {
-    column-count: 5;
+
+/* Card Styles */
+
+.card {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.page-link {
+    color: #31bfb1;
+}
+.page-item.active .page-link {
+    background-color: #31bfb1;
+    border-color: #31bfb1;
+    color: white;
+}
+.page-link:focus {
+    box-shadow: none;
+}
+
+.btn-primary:active, .btn-primary:focus {
+    background-color: #31bfb1 !important;
+    border-color: #31bfb1 !important;
+}
+.price {
+    color:#666666;
+}
+h1 {
+    font-family: 'Great Vibes', cursive;
+    color: #31bfb1;
+    font-size: 80px;
+    text-shadow: 2px 2px 0px rgb(85 85 85);
+}
+
+h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #31bfb1;
+    font-size: 50px;
+    text-shadow: 2px 2px 0px rgb(85 85 85);
 }

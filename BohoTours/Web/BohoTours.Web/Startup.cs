@@ -1,6 +1,4 @@
-﻿using BohoTours.Services.Data.Hotels;
-
-namespace BohoTours.Web
+﻿namespace BohoTours.Web
 {
     using System.Reflection;
 
@@ -11,10 +9,10 @@ namespace BohoTours.Web
     using BohoTours.Data.Repositories;
     using BohoTours.Data.Seeding;
     using BohoTours.Services.Data;
+    using BohoTours.Services.Data.Hotels;
     using BohoTours.Services.Mapping;
     using BohoTours.Services.Messaging;
     using BohoTours.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
