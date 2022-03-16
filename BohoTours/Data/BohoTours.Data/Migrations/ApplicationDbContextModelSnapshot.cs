@@ -261,6 +261,41 @@ namespace BohoTours.Data.Migrations
                     b.ToTable("Hotels");
                 });
 
+            modelBuilder.Entity("BohoTours.Data.Models.HotelImages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("HotelImages");
+                });
+
             modelBuilder.Entity("BohoTours.Data.Models.HotelRoom", b =>
                 {
                     b.Property<int>("Id")
@@ -622,6 +657,17 @@ namespace BohoTours.Data.Migrations
                     b.Navigation("Town");
                 });
 
+            modelBuilder.Entity("BohoTours.Data.Models.HotelImages", b =>
+                {
+                    b.HasOne("BohoTours.Data.Models.Hotel", "Hotel")
+                        .WithMany("HotelImages")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+                });
+
             modelBuilder.Entity("BohoTours.Data.Models.HotelRoom", b =>
                 {
                     b.HasOne("BohoTours.Data.Models.Hotel", "Hotel")
@@ -756,6 +802,8 @@ namespace BohoTours.Data.Migrations
 
             modelBuilder.Entity("BohoTours.Data.Models.Hotel", b =>
                 {
+                    b.Navigation("HotelImages");
+
                     b.Navigation("HotelRooms");
                 });
 
