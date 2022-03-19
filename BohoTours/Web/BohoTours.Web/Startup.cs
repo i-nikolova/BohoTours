@@ -1,4 +1,6 @@
-﻿namespace BohoTours.Web
+﻿using CloudinaryDotNet;
+
+namespace BohoTours.Web
 {
     using System.Reflection;
 
@@ -66,8 +68,19 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHotelsService, HotelsService>();
+            services.AddTransient<ITownsService, TownsService>();
+            services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<AngleSharp.Html.Parser.HtmlParser>();
             services.AddTransient<System.Net.Http.HttpClient>();
+
+            Account account = new Account(
+                this.configuration["Cloudinary:AppName"],
+                this.configuration["Cloudinary:AppKey"],
+                this.configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            services.AddSingleton(cloudinary);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
