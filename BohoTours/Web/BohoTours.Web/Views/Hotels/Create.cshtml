@@ -1,0 +1,138 @@
+﻿@model BohoTours.Web.ViewModels.Hotels.CreateHotelViewModel
+
+@{
+    ViewData["Title"] = "Add hotel";
+}
+
+<h1>Add new hotel</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CountryId"></label>
+        <select asp-for="CountryId" class="form-control" onchange="" asp-items="@Model.Countries">
+            <option>Select Country</option>>
+        </select>
+
+        <span asp-validation-for="CountryId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TownId"></label>
+        <select asp-for="TownId" class="form-control" disabled="disabled">
+            <option>Select Town</option>
+        </select>
+        <span asp-validation-for="TownId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LAT"></label>
+        <input asp-for="LAT" class="form-control" />
+        <span asp-validation-for="LAT" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LON"></label>
+        <input asp-for="LON" class="form-control" />
+        <span asp-validation-for="LON" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Images"></label>
+        <input asp-for="Images" class="form-control" />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+
+    <button id="addRow" type="button" class="btn btn-info">Add hotel room</button>
+    <div id="newRow">
+        <input type="hidden" id="total" value="0" />
+    </div>
+
+
+    <input type="submit" class="btn btn-primary" value="Add hotel" />
+</form>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#CountryId').change(function () {
+            $('#TownId option').remove();
+            $.getJSON('/Hotels/GetTowns', { countryId: $('#CountryId').val() }, function (data) {
+                $('#TownId').append('<option>Select Town</option>');
+                $.each(data, function () {
+                    $('#TownId').append('<option value=' +
+                        this.value + '>' + this.text + '</option>');
+                });
+                if ($("#TownId option").length > 1) {
+                    $("#TownId").removeAttr("disabled");
+                }
+                if ($("#TownId option").length < 2) {
+                    $("#TownId").attr("disabled", true);
+                }
+            }).fail(function () {
+                alert('Cannot retrieve cities!');
+            });
+        });
+    </script>
+    <script>
+        $(document).on('click', '#addRow',function ()
+        {
+            var rowCount = parseInt($("#total").val());
+            rowCount++;
+            $("#total").val(rowCount);
+            var html = '';
+            html += '<div id="inputRow">';
+            html += '<input type="hidden" id="thisHotelCount" value="' + (rowCount - 1) + '" />';
+            html += '<input type="hidden" id="isDeleted" value="0" />';
+            html += '<label class="mr-2">Room Type</label>';
+            html += '<input type="text" name="hotelRooms[' + (rowCount - 1) + '].RoomType" class="mr-2" value=" "/>';
+            html += '<label class="mr-2">Max Capacity</label>';
+            html += '<input type="number" name="hotelRooms[' + (rowCount - 1) + '].MaxCapacity" class="mr-2" value="1"/>';
+            //add more inputs here...
+            html += '<button id="addPrice" type="button" class="btn btn-info mb-2 mr-2">Add room price</button>';
+            html += '<button id="removeRow" type="button" class="btn btn-danger mb-2">Remove</button>';
+            html += '<input type="hidden" id="totalPrices" value="0" />';
+            html += '</div>';
+
+            $('#newRow').append(html);
+
+        });
+        $(document).on('click', '#removeRow', function ()
+        {
+            $(this).closest('#inputRow').addClass("d-none");
+            $(this).siblings('#isDeleted').val(1);
+
+        });
+
+        $(document).on('click', '#addPrice',function () {
+            var rowPriceCount = parseInt($(this).parent().children('#totalPrices').val());
+            rowPriceCount++;
+            $(this).parent().children('#totalPrices').val(rowPriceCount);
+            var roomNumber = $(this).siblings('#thisHotelCount').val();
+
+            var rowHtml = '';
+            rowHtml += '<div id="inputRowPrice">';
+            rowHtml += '<input type="hidden" id="isDeleted" value="0" />';
+            rowHtml += '<label class="mr-2">Date</label>';
+            rowHtml += '<input type="date" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].Date" class="mr-2" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")"/>';
+            rowHtml += '<label class="mr-2">PricePerNight</label>';
+            rowHtml += '<input type="number" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].PricePerNight" class="mr-2" value="0.00"/>';
+            //add more inputs here...
+            rowHtml += '<button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>';
+            rowHtml += '</div>';
+
+            $(this).closest('#inputRow').append(rowHtml);
+        });
+        $(document).on('click', '#removePriceRow', function () {
+            $(this).closest('#inputRowPrice').addClass("d-none");
+            $(this).siblings('#isDeleted').val(1);
+        });
+    </script>
+}
+

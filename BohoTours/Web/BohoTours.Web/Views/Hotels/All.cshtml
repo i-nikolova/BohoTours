@@ -1,0 +1,115 @@
+﻿@model BohoTours.Web.ViewModels.Hotels.HotelsListViewModel
+
+@{
+    ViewData["Title"] = "Hotels";
+}
+
+<link rel="stylesheet" href="~/css/templatemo-style.css" />
+<link rel="stylesheet" href="~/slick/slick.css" />
+<link rel="stylesheet" href="~/slick/slick-theme.css" />
+
+<div class="text-center m-2">
+    <h1 class="cust-font">Hotels</h1>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+    </div>
+    <form method="get">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 mt-3">
+                <label asp-for="Town"></label>
+                <select class="form-control search-slt" asp-for="Town">
+                    <option value="">All</option>
+                    @foreach (var town in Model.Towns)
+                    {
+                        if (town == Model.Town)
+                        {
+                            <option selected="selected" value="@town">@town</option>
+                        }
+                        else
+                        {
+                            <option value="@town">@town</option>
+                        }
+
+                    }
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-3 mt-3">
+                <label asp-for="SearchTerm"></label>
+                <input type="text" asp-for="SearchTerm" class="form-control search-slt" placeholder="Hotel name" value="@Model.SearchTerm">
+            </div>
+            <div class="col-lg-3 col-md-3 mt-3">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control search-slt">
+                    <option value="0">Date added</option>
+                    <option value="1">Price (desc)</option>
+                    <option value="2">Price (asc)</option>
+                    <option value="3">Name</option>
+                    <option value="4">Town</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-3 mt-5">
+                <button type="submit" asp-route-id="1" class="btn btn-primary wrn-btn">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <div class="row">
+        @foreach (var item in @Model.Hotels)
+        {
+            <div class="col-4 mt-4">
+                <div class="card h-100">
+                    <img class="card-img-top" width="100" height="150" src="@item.ImagePath" alt="@item.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.TownName, @item.CountryName</h6>
+
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="font-weight-bold text-center price">$@item.RoomMinPrice<small>/night</small></h5>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-block">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (!Model.Hotels.Any())
+{
+    <h3 class="text-center">No hotels found!</h3>
+}
+else
+{
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if (!Model.HasPrevious){ <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.PreviousPageNumber" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Town">Previous</a>
+            </li>
+            @for (int i = @Model.PageNumber - 2; i < @Model.PageNumber; i++)
+            {
+                @if (i > 0)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="All" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Town" asp-route-id="@i">@i</a></li>
+                }
+            }
+            <li class="page-item active">
+                <a class="page-link">@Model.PageNumber <span class="sr-only">(current)</span></a>
+            </li>
+            @for (int i = @Model.PageNumber + 1; i < @Model.PageNumber + 3; i++)
+            {
+                @if (i <= @Model.PagesCount)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Town">@i</a></li>
+                }
+            }
+            <li class="page-item @if (!Model.HasNext){ <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Town">Next</a>
+            </li>
+        </ul>
+    </nav>
+}
