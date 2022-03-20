@@ -49,11 +49,7 @@ namespace BohoTours.Web
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
 
-            services.AddControllersWithViews(
-                options =>
-                    {
-                        options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-                    }).AddRazorRuntimeCompilation();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -69,6 +65,7 @@ namespace BohoTours.Web
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IHotelsService, HotelsService>();
             services.AddTransient<ITownsService, TownsService>();
+            services.AddTransient<IContinentsService, ContinentsService>();
             services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<AngleSharp.Html.Parser.HtmlParser>();
             services.AddTransient<System.Net.Http.HttpClient>();

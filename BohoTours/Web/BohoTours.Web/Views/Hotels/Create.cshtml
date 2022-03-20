@@ -4,134 +4,330 @@
     ViewData["Title"] = "Add hotel";
 }
 
-<h1>Add new hotel</h1>
+<h1 class="d-flex justify-content-center">Add new hotel</h1>
 
 <form method="post" enctype="multipart/form-data">
+
     <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="mb-2 mr-sm-2" asp-for="LAT"></label>
+            <input asp-for="LAT" class="form-control" />
+            <span asp-validation-for="LAT" class="text-danger"></span>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="mb-2 mr-sm-2" asp-for="LON"></label>
+            <input asp-for="LON" class="form-control" />
+            <span asp-validation-for="LON" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Images"></label>
+            <input asp-for="Images" class="form-inline" />
+            <span asp-validation-for="Images" class="text-danger"></span>
+        </div>
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" rows="5"></textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="CountryId"></label>
-        <select asp-for="CountryId" class="form-control" onchange="" asp-items="@Model.Countries">
-            <option>Select Country</option>>
-        </select>
 
-        <span asp-validation-for="CountryId" class="text-danger"></span>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label class="mb-2 mr-sm-2" asp-for="CountryId"></label>
+            <select asp-for="CountryId" class="form-control custom-select mr-sm-2" asp-items="@Model.Countries">
+                @if (Model.CountryId == 0)
+                {
+                    <option>Select Country</option>
+                }
+                else
+                {
+                    <option value="@Model.CountryId">@Model.CountryName</option>
+                }
+            </select>
+            <span asp-validation-for="CountryId" class="text-danger"></span>
+            <button type="button" class="btn btn-info mt-3" data-toggle="modal" data-target="#addCountryModal">Add new country</button>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label class="mb-2 mr-sm-2" asp-for="TownId"></label>
+            <select asp-for="TownId" class="form-control custom-select mr-sm-2" >
+                @if (Model.TownId == 0)
+                {
+                    <option>Select Town</option>
+                }
+                else
+                {
+                    <option value="@Model.TownId">@Model.TownName</option>
+                }
+            </select>
+            <span asp-validation-for="TownId" class="text-danger"></span>
+            <button type="button" class="btn btn-info mt-3" data-toggle="modal" data-target="#addTownModal">Add new town</button>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="TownId"></label>
-        <select asp-for="TownId" class="form-control" disabled="disabled">
-            <option>Select Town</option>
-        </select>
-        <span asp-validation-for="TownId" class="text-danger"></span>
+    <hr>
+    <h3 class="d-flex justify-content-center">Hotel Rooms</h3>
+    <div class="d-flex justify-content-center">
+        <button id="addRow" type="button" class="btn btn-info mb-3">Add hotel room</button>
     </div>
-    <div class="form-group">
-        <label asp-for="LAT"></label>
-        <input asp-for="LAT" class="form-control" />
-        <span asp-validation-for="LAT" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="LON"></label>
-        <input asp-for="LON" class="form-control" />
-        <span asp-validation-for="LON" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Images"></label>
-        <input asp-for="Images" class="form-control" />
-        <span asp-validation-for="Images" class="text-danger"></span>
-    </div>
-
-    <button id="addRow" type="button" class="btn btn-info">Add hotel room</button>
     <div id="newRow">
         <input type="hidden" id="total" value="0" />
     </div>
-
-
-    <input type="submit" class="btn btn-primary" value="Add hotel" />
+    <hr />
+    <div class="d-flex justify-content-center">
+        <input type="submit" class="btn btn-primary btn-lg mr-3" value="Add hotel" />
+        <a type="submit" class="btn btn-secondary btn-lg" asp-action="Create">Clear</a>
+    </div>
 </form>
 
 
+<!-- Modal -->
+<div class="modal fade" data-backdrop="false" role="dialog" id="addCountryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCountryModal">Create Country</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="mb-2 mr-sm-2" asp-for="ContinentId">Continent:</label>
+                        <select class="form-control custom-select mr-sm-2" asp-for="ContinentId" asp-items="@Model.Continents">
+                        </select>
+                        <label for="create-country-name" class="col-form-label">Country Name:</label>
+                        <input type="text" class="form-control" id="create-country-name">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeCountryCreate">Close</button>
+                <button type="button" class="btn btn-primary" id="addCountry">Add country</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Town Modal -->
+<div class="modal fade" data-backdrop="false" role="dialog" id="addTownModal" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Town</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label class="mb-2 mr-sm-2" for="addedCountryId">Country</label>
+                    <select id="addedCountryId" class="form-control custom-select mr-sm-2">
+                    </select>
+                    <label for="create-town-name" class="col-form-label">Town Name:</label>
+                    <input type="text" class="form-control" id="create-town-name">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeTownCreate">Close</button>
+                <button type="button" class="btn btn-primary" id="addTown">Add town</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
+
+    $(document).off('focusin.modal');
+    <script>
+        $(document).on('click',
+            '#addCountry',
+            function () {
+                var continentId = $('#ContinentId').val();
+                var countryName = $('#create-country-name').val();
+                $.ajax({
+                    method: 'POST',
+                    url: '/api/Countries',
+                    data: JSON.stringify({
+                        continentId,
+                        countryName
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (res) {
+                        $("#addCountryModal").modal('hide');
+                        $("#create-country-name").val('');
+
+                        $('#CountryId option').remove();
+                        $.getJSON('/api/Countries',
+                            function (data) {
+                                $('#CountryId').append('<option>Select Country</option>');
+                                $.each(data,
+                                    function () {
+                                        $('#CountryId').append('<option value=' +
+                                            this.id +
+                                            '>' +
+                                            this.name +
+                                            '</option>');
+                                    });
+                            });
+
+                        alert("Successfully added country");
+                    },
+                    error: function (res) {
+                        var err = JSON.parse(res.responseText);
+                        let errorMsg = [];
+
+                        for (var error in err.errors) {
+                            err.errors[error].forEach(x => errorMsg.push(x));
+                            alert(errorMsg.join('\r\n'));
+                        }
+
+                    }
+                });
+            });
+    </script>
+    <script>
+        $(document).on('click',
+            '#addTown',
+            function () {
+                var addedCountryId = $('#addedCountryId').val();
+                var townName = $('#create-town-name').val();
+                $.ajax({
+                    method: 'POST',
+                    url: '/api/Towns',
+                    data: JSON.stringify({
+                        addedCountryId,
+                        townName
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (res) {
+                        $("#addTownModal").modal('hide');
+                        $("#create-town-name").val('');
+
+                        $('#TownId option').remove();
+                        $.getJSON('/api/Towns',
+                            function (data) {
+                                $('#TownId').append('<option>Select Town</option>');
+                                $.each(data,
+                                    function () {
+                                        $('#TownId').append('<option value=' +
+                                            this.id +
+                                            '>' +
+                                            this.name +
+                                            '</option>');
+                                    });
+                            });
+
+                        alert("Successfully added town");
+                    },
+                    error: function (res) {
+                        var err = JSON.parse(res.responseText);
+                        let errorMsg = [];
+                        for (var error in err.errors) {
+                            err.errors[error].forEach(x => errorMsg.push(x));
+                            alert(errorMsg.join('\r\n'));
+                        }
+
+                    }
+                });
+            });
+    </script>
+
     <script type="text/javascript">
         $('#CountryId').change(function () {
             $('#TownId option').remove();
-            $.getJSON('/Hotels/GetTowns', { countryId: $('#CountryId').val() }, function (data) {
-                $('#TownId').append('<option>Select Town</option>');
-                $.each(data, function () {
-                    $('#TownId').append('<option value=' +
-                        this.value + '>' + this.text + '</option>');
+            $.getJSON('/api/Towns',
+                { countryId: $('#CountryId').val() },
+                function (data) {
+                    $('#TownId').append('<option>Select Town</option>');
+                    $.each(data,
+                        function () {
+                            $('#TownId').append('<option value=' +
+                                this.id +
+                                '>' +
+                                this.name +
+                                '</option>');
+                        });
                 });
-                if ($("#TownId option").length > 1) {
-                    $("#TownId").removeAttr("disabled");
-                }
-                if ($("#TownId option").length < 2) {
-                    $("#TownId").attr("disabled", true);
-                }
-            }).fail(function () {
-                alert('Cannot retrieve cities!');
-            });
         });
     </script>
     <script>
-        $(document).on('click', '#addRow',function ()
-        {
-            var rowCount = parseInt($("#total").val());
-            rowCount++;
-            $("#total").val(rowCount);
-            var html = '';
-            html += '<div id="inputRow">';
-            html += '<input type="hidden" id="thisHotelCount" value="' + (rowCount - 1) + '" />';
-            html += '<input type="hidden" id="isDeleted" value="0" />';
-            html += '<label class="mr-2">Room Type</label>';
-            html += '<input type="text" name="hotelRooms[' + (rowCount - 1) + '].RoomType" class="mr-2" value=" "/>';
-            html += '<label class="mr-2">Max Capacity</label>';
-            html += '<input type="number" name="hotelRooms[' + (rowCount - 1) + '].MaxCapacity" class="mr-2" value="1"/>';
-            //add more inputs here...
-            html += '<button id="addPrice" type="button" class="btn btn-info mb-2 mr-2">Add room price</button>';
-            html += '<button id="removeRow" type="button" class="btn btn-danger mb-2">Remove</button>';
-            html += '<input type="hidden" id="totalPrices" value="0" />';
-            html += '</div>';
+        $(document).on('click',
+            '#addRow',
+            function() {
+                var rowCount = parseInt($("#total").val());
+                rowCount++;
+                $("#total").val(rowCount);
+                var html = '';
+                html += '<div id="inputRow">';
+                html += '<input type="hidden" id="thisHotelCount" value="' + (rowCount - 1) + '" />';
+                html += '<input type="hidden" id="isDeleted" value="0" />';
+                html += '<label class="mr-2">Room Type</label>';
+                html += '<input type="text" name="hotelRooms[' + (rowCount - 1) + '].RoomType" class="mr-2" value=" "/>';
+                html += '<label class="mr-2">Max Capacity</label>';
+                html += '<input type="number" name="hotelRooms[' + (rowCount - 1) + '].MaxCapacity" class="mr-2" value="1"/>';
+                //add more inputs here...
+                html += '<button id="addPrice" type="button" class="btn btn-info mb-2 mr-2">Add room price</button>';
+                html += '<button id="removeRow" type="button" class="btn btn-danger mb-2">Remove</button>';
+                html += '<input type="hidden" id="totalPrices" value="0" />';
+                html += '<h5>Room prices per days</h5>';
+                html += '<hr>';
+                html += '</div>';
 
-            $('#newRow').append(html);
 
-        });
-        $(document).on('click', '#removeRow', function ()
-        {
-            $(this).closest('#inputRow').addClass("d-none");
-            $(this).siblings('#isDeleted').val(1);
+                $('#newRow').append(html);
 
-        });
+            });
+        $(document).on('click',
+            '#removeRow',
+            function() {
+                $(this).closest('#inputRow').addClass("d-none");
+                $(this).siblings('#isDeleted').val(1);
 
-        $(document).on('click', '#addPrice',function () {
-            var rowPriceCount = parseInt($(this).parent().children('#totalPrices').val());
-            rowPriceCount++;
-            $(this).parent().children('#totalPrices').val(rowPriceCount);
-            var roomNumber = $(this).siblings('#thisHotelCount').val();
+            });
 
-            var rowHtml = '';
-            rowHtml += '<div id="inputRowPrice">';
-            rowHtml += '<input type="hidden" id="isDeleted" value="0" />';
-            rowHtml += '<label class="mr-2">Date</label>';
-            rowHtml += '<input type="date" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].Date" class="mr-2" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")"/>';
-            rowHtml += '<label class="mr-2">PricePerNight</label>';
-            rowHtml += '<input type="number" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].PricePerNight" class="mr-2" value="0.00"/>';
-            //add more inputs here...
-            rowHtml += '<button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>';
-            rowHtml += '</div>';
+        $(document).on('click',
+            '#addPrice',
+            function() {
+                var rowPriceCount = parseInt($(this).parent().children('#totalPrices').val());
+                rowPriceCount++;
+                $(this).parent().children('#totalPrices').val(rowPriceCount);
+                var roomNumber = $(this).siblings('#thisHotelCount').val();
 
-            $(this).closest('#inputRow').append(rowHtml);
-        });
-        $(document).on('click', '#removePriceRow', function () {
-            $(this).closest('#inputRowPrice').addClass("d-none");
-            $(this).siblings('#isDeleted').val(1);
+                var rowHtml = '';
+                rowHtml += '<div id="inputRowPrice">';
+                rowHtml += '<input type="hidden" id="isDeleted" value="0" />';
+                rowHtml += '<label class="mr-2">Date</label>';
+                rowHtml += '<input type="date" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].Date" class="mr-2" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")"/>';
+                rowHtml += '<label class="mr-2">PricePerNight</label>';
+                rowHtml += '<input type="number" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].PricePerNight" class="mr-2" value="0.00"/>';
+                //add more inputs here...
+                rowHtml += '<button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>';
+                rowHtml += '</div>';
+
+                $(this).closest('#inputRow').append(rowHtml);
+            });
+        $(document).on('click',
+            '#removePriceRow',
+            function() {
+                $(this).closest('#inputRowPrice').addClass("d-none");
+                $(this).siblings('#isDeleted').val(1);
+            });
+    </script>
+    <script>
+        $('#addTownModal').on('shown.bs.modal', function () {
+            $('#addedCountryId option').remove();
+            $.getJSON('/api/Countries',
+                function (data) {
+                    $('#addedCountryId').append('<option>Select Town</option>');
+                    $.each(data,
+                        function () {
+                            $('#addedCountryId').append('<option value=' +
+                                this.id +
+                                '>' +
+                                this.name +
+                                '</option>');
+                        });
+                });
         });
     </script>
 }

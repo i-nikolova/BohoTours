@@ -3,7 +3,9 @@
     public class DataConstants
     {
         public const int CountryMaxLength = 50;
+        public const int CountryMinLength = 3;
         public const int TownMaxLength = 50;
+        public const int TownMinLength = 3;
         public const int HotelNameMaxLength = 50;
         public const int HotelNameMinLength = 5;
         public const int ContinentCodeMaxLength = 2;

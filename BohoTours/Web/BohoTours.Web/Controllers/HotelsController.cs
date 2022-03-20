@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using BohoTours.Services.Data;
+using BohoTours.Web.ViewModels.Continenst;
 using BohoTours.Web.ViewModels.Countries;
 using BohoTours.Web.ViewModels.Towns;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,12 +22,14 @@ namespace BohoTours.Web.Controllers
         private readonly IHotelsService hotelsService;
         private readonly ITownsService townsService;
         private readonly ICountriesService countriesService;
+        private readonly IContinentsService continentsService;
 
-        public HotelsController(IHotelsService hotelsService, ITownsService townsService, ICountriesService countriesService)
+        public HotelsController(IHotelsService hotelsService, ITownsService townsService, ICountriesService countriesService, IContinentsService continentsService)
         {
             this.hotelsService = hotelsService;
             this.townsService = townsService;
             this.countriesService = countriesService;
+            this.continentsService = continentsService;
         }
 
         public IActionResult All(string town, string searchTerm, HotelSorting sorting, int id = 1)
@@ -103,6 +106,12 @@ namespace BohoTours.Web.Controllers
                     Text = x.Name,
                     Value = x.Id.ToString(),
                 }),
+                Continents = this.continentsService.GetAll<ContinentViewModel>()
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Name,
+                        Value = x.Id.ToString(),
+                    }),
             };
 
             return this.View(viewModel);
@@ -111,20 +120,47 @@ namespace BohoTours.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateHotelViewModel hotel)
         {
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || !hotel.HotelRooms.Any() || !hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any())
             {
                 hotel.Countries = this.countriesService.GetAll<CountryViewModel>().Select(x => new SelectListItem()
                 {
                     Text = x.Name,
                     Value = x.Id.ToString(),
                 });
+                hotel.Continents = this.continentsService.GetAll<ContinentViewModel>()
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Name,
+                        Value = x.Id.ToString(),
+                    });
 
+                if (hotel.CountryId != 0)
+                {
+                    hotel.CountryName = hotel.Countries.FirstOrDefault(x => x.Value == hotel.CountryId.ToString()).Text;
+                }
+
+                if (hotel.TownId != 0)
+                {
+                    hotel.TownName = this.townsService.GetAll<TownViewModel>().FirstOrDefault(x => x.Id == hotel.TownId).Name;
+                }
+
+                if (!hotel.HotelRooms.Any())
+                {
+                    this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Hotel must have at least one room");
+                }
+
+                if (!hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any())
+                {
+                    this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Rooms must have at least one price");
+                }
+
+                hotel.Countries = hotel.Countries.Where(x => x.Value != hotel.CountryId.ToString());
                 return this.View(hotel);
             }
 
             var hotelId = await this.hotelsService.CreateHotel(hotel);
 
-            return this.Redirect($"/");
+            return this.Redirect($"/Hotels/Details/{hotelId}");
         }
 
         public JsonResult GetTowns(int countryId)

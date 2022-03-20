@@ -14,7 +14,7 @@ namespace BohoTours.Web.ViewModels.Hotels
     public class CreateHotelViewModel
     {
         [Required]
-        [StringLength(DataConstants.HotelNameMaxLength,MinimumLength = DataConstants.HotelNameMinLength)]
+        [StringLength(DataConstants.HotelNameMaxLength, MinimumLength = DataConstants.HotelNameMinLength)]
         public string Name { get; set; }
 
         [Required]
@@ -27,6 +27,12 @@ namespace BohoTours.Web.ViewModels.Hotels
         [Required]
         public int CountryId { get; set; }
 
+        public int ContinentId { get; set; }
+
+        public string CountryName { get; set; }
+
+        public string TownName { get; set; }
+
         [Required]
         public string LAT { get; set; }
 
@@ -37,6 +43,8 @@ namespace BohoTours.Web.ViewModels.Hotels
         public ICollection<IFormFile> Images { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
+
+        public IEnumerable<SelectListItem> Continents { get; set; }
 
         public IEnumerable<HotelRoomViewModel> HotelRooms { get; set; } = new List<HotelRoomViewModel>();
     }
