@@ -43,7 +43,7 @@
         [Required]
         public ICollection<IFormFile> Images { get; set; }
 
-        public ICollection<string> ImportedImages { get; set; }
+        public ICollection<ImportedImagesViewModel> ImportedImages { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
 

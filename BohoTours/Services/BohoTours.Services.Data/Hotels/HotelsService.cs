@@ -93,9 +93,9 @@
             return hotel.Id;
         }
 
-        public Task<int> EditHotel(EditHotelViewModel hotel)
+        public Task<int> Edit(EditHotelViewModel hotel)
         {
-            
+            return this.View(hotel);
         }
     }
 }

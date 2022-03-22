@@ -38,8 +38,8 @@
                 @foreach (var image in Model.ImportedImages)
                 {
                     <div class="myImg col-md-2 position-relative">
-                        <img src="@image" class="w-100">
-                        <a onclick="this.parentElement.style.display='none'" class="btn btn-danger button_class">Delete</a>
+                        <img src="@image.ImageUrl" class="w-100">
+                        <a onclick="this.parentElement.style.display = 'none'" class="btn btn-danger button_class">Delete</a>
                     </div>
 
                 }
