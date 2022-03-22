@@ -1,18 +1,17 @@
-﻿using System.Threading.Tasks;
-using BohoTours.Services.Data.CloudinaryHelper;
-using BohoTours.Web.ViewModels.Hotels;
-using CloudinaryDotNet;
-
-namespace BohoTours.Services.Data.Hotels
+﻿namespace BohoTours.Services.Data.Hotels
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
+    using BohoTours.Services.Data.CloudinaryHelper;
     using BohoTours.Services.Mapping;
+    using BohoTours.Web.ViewModels.Hotels;
+    using CloudinaryDotNet;
 
     public class HotelsService : IHotelsService
     {
@@ -92,6 +91,11 @@ namespace BohoTours.Services.Data.Hotels
             await this.hotelsRepository.SaveChangesAsync();
 
             return hotel.Id;
+        }
+
+        public Task<int> EditHotel(EditHotelViewModel hotel)
+        {
+            
         }
     }
 }

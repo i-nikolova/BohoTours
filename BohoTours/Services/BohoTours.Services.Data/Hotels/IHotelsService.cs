@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using BohoTours.Web.ViewModels.Hotels;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-
-namespace BohoTours.Services.Data.Hotels
+﻿namespace BohoTours.Services.Data.Hotels
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using BohoTours.Web.ViewModels.Hotels;
+    using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
     public interface IHotelsService
     {
@@ -19,5 +19,7 @@ namespace BohoTours.Services.Data.Hotels
         T GetById<T>(int id);
 
         Task<int> CreateHotel(CreateHotelViewModel hotel);
+
+        Task<int> EditHotel(EditHotelViewModel hotel);
     }
 }

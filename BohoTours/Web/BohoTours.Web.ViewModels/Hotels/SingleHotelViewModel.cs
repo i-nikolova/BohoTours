@@ -1,9 +1,8 @@
-﻿using System.Linq;
-
-namespace BohoTours.Web.ViewModels.Hotels
+﻿namespace BohoTours.Web.ViewModels.Hotels
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
 
     using AutoMapper;
@@ -12,6 +11,8 @@ namespace BohoTours.Web.ViewModels.Hotels
 
     public class SingleHotelViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string LAT { get; set; }

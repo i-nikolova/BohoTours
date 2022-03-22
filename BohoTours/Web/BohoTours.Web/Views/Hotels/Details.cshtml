@@ -2,7 +2,7 @@
 
 <div class="blog-single gray-bg">
     <div class="container">
-        <h1 class="hotel-title">@Model.Name</h1>
+        <h1 class="hotel-title" asp-for="@Model.Name">@Model.Name</h1>
         <div class="row align-items-start">
             <div class="col-lg-8 m-15px-tb">
                 <article class="article">
@@ -86,18 +86,18 @@
                     <h4>Leave Feedback</h4>
                     <form id="contact-form" method="POST">
                         <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="rating">
-                                    <input type="radio" name="rating" value="5" id="5">
-                                    <label for="5">☆</label> <input type="radio" name="rating" value="4" id="4">
-                                    <label for="4">☆</label> <input type="radio" name="rating" value="3" id="3">
-                                    <label for="3">☆</label> <input type="radio" name="rating" value="2" id="2">
-                                    <label for="2">☆</label> <input type="radio" name="rating" value="1" id="1">
-                                    <label for="1">☆</label>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="rating">
+                                        <input type="radio" name="rating" value="5" id="5">
+                                        <label for="5">☆</label> <input type="radio" name="rating" value="4" id="4">
+                                        <label for="4">☆</label> <input type="radio" name="rating" value="3" id="3">
+                                        <label for="3">☆</label> <input type="radio" name="rating" value="2" id="2">
+                                        <label for="2">☆</label> <input type="radio" name="rating" value="1" id="1">
+                                        <label for="1">☆</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input name="Name" id="name" placeholder="Name *" class="form-control" type="text">
@@ -132,9 +132,10 @@
                             <strong>Destination:</strong> @Model.TownName, @Model.CountryName
                         </div>
                         <div align="center">
-                            Prices from: 
+                            Prices from:
                             <h2>$@Model.RoomMinPrice</h2>
                             <div> <a class="btn btn-primary">Book now</a></div>
+                            <div> <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a></div>
                         </div>
                     </div>
                 </div>

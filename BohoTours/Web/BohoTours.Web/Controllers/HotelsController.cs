@@ -1,21 +1,20 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using BohoTours.Services.Data;
-using BohoTours.Web.ViewModels.Continenst;
-using BohoTours.Web.ViewModels.Countries;
-using BohoTours.Web.ViewModels.Towns;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-
-namespace BohoTours.Web.Controllers
+﻿namespace BohoTours.Web.Controllers
 {
+    using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
+    using BohoTours.Services.Data;
     using BohoTours.Services.Data.Hotels;
+    using BohoTours.Web.ViewModels.Continenst;
+    using BohoTours.Web.ViewModels.Countries;
     using BohoTours.Web.ViewModels.Hotels;
+    using BohoTours.Web.ViewModels.Towns;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
     public class HotelsController : Controller
     {
@@ -163,14 +162,67 @@ namespace BohoTours.Web.Controllers
             return this.Redirect($"/Hotels/Details/{hotelId}");
         }
 
-        public JsonResult GetTowns(int countryId)
+        public IActionResult Edit(int id)
         {
-            return this.Json(this.townsService.GetAll<TownViewModel>().Where(x => x.CountryId == countryId)
-                .Select(x => new SelectListItem()
+            var hotel = this.hotelsService.GetById<EditHotelViewModel>(id);
+            hotel.Continents = this.continentsService.GetAll<ContinentViewModel>().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+            });
+            hotel.Countries = this.countriesService.GetAll<CountryViewModel>().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+            });
+
+            return this.View(hotel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditHotelViewModel hotel)
+        {
+            if (!this.ModelState.IsValid || !hotel.HotelRooms.Any() || !hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any())
+            {
+                hotel.Countries = this.countriesService.GetAll<CountryViewModel>().Select(x => new SelectListItem()
                 {
                     Text = x.Name,
                     Value = x.Id.ToString(),
-                }));
+                });
+                hotel.Continents = this.continentsService.GetAll<ContinentViewModel>()
+                    .Select(x => new SelectListItem()
+                    {
+                        Text = x.Name,
+                        Value = x.Id.ToString(),
+                    });
+
+                if (hotel.CountryId != 0)
+                {
+                    hotel.CountryName = hotel.Countries.FirstOrDefault(x => x.Value == hotel.CountryId.ToString()).Text;
+                }
+
+                if (hotel.TownId != 0)
+                {
+                    hotel.TownName = this.townsService.GetAll<TownViewModel>().FirstOrDefault(x => x.Id == hotel.TownId).Name;
+                }
+
+                if (!hotel.HotelRooms.Any())
+                {
+                    this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Hotel must have at least one room");
+                }
+
+                if (!hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any())
+                {
+                    this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Rooms must have at least one price");
+                }
+
+                hotel.Countries = hotel.Countries.Where(x => x.Value != hotel.CountryId.ToString());
+                return this.View(hotel);
+            }
+
+            var hotelId = await this.hotelsService.EditHotel(hotel);
+
+            return this.Redirect($"/Hotels/Details/{hotelId}");
         }
     }
 }

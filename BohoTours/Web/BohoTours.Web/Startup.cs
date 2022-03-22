@@ -1,6 +1,4 @@
-﻿using CloudinaryDotNet;
-
-namespace BohoTours.Web
+﻿namespace BohoTours.Web
 {
     using System.Reflection;
 
@@ -15,6 +13,7 @@ namespace BohoTours.Web
     using BohoTours.Services.Mapping;
     using BohoTours.Services.Messaging;
     using BohoTours.Web.ViewModels;
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
