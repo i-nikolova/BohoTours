@@ -31,7 +31,7 @@
             this.continentsService = continentsService;
         }
 
-        public IActionResult All(string town, string searchTerm, HotelSorting sorting, int id = 1)
+        public IActionResult All(string town, string searchTerm, Sorting sorting, int id = 1)
         {
             var itemsPerPage = 12;
 
@@ -42,10 +42,10 @@
             {
                 hotels = sorting switch
                 {
-                    HotelSorting.Name => hotels.OrderBy(x => x.Name),
-                    HotelSorting.PriceAsc => hotels.OrderBy(x => x.RoomMinPrice),
-                    HotelSorting.PriceDesc => hotels.OrderByDescending(x => x.RoomMinPrice),
-                    HotelSorting.Town => hotels.OrderBy(x => x.TownName),
+                    Sorting.Name => hotels.OrderBy(x => x.Name),
+                    Sorting.PriceAsc => hotels.OrderBy(x => x.RoomMinPrice),
+                    Sorting.PriceDesc => hotels.OrderByDescending(x => x.RoomMinPrice),
+                    Sorting.Country => hotels.OrderBy(x => x.TownName),
                     _ => hotels,
                 };
             }
@@ -119,7 +119,22 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateHotelViewModel hotel)
         {
-            if (!this.ModelState.IsValid || !hotel.HotelRooms.Any(x => !x.IsDeleted) || !hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any(x => !x.IsDeleted))
+            foreach (var hotelRoom in hotel.HotelRooms.Where(x => !x.IsDeleted))
+            {
+                if (!hotelRoom.HotelRoomPrices.Any(x => !x.IsDeleted))
+                {
+                    this.ModelState.AddModelError(nameof(EditHotelViewModel.HotelRooms), $"Hotel Room Type '{hotelRoom.RoomType}' must have at least one price");
+                }
+            }
+
+            if (!hotel.HotelRooms.Any(x => !x.IsDeleted))
+            {
+                this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Hotel must have at least one room");
+            }
+
+            var errors = this.ModelState.ErrorCount;
+
+            if (!this.ModelState.IsValid || !hotel.HotelRooms.Any(x => !x.IsDeleted) || errors != 0)
             {
                 hotel.Countries = this.countriesService.GetAll<CountryViewModel>().Select(x => new SelectListItem()
                 {
@@ -143,21 +158,11 @@
                     hotel.TownName = this.townsService.GetAll<TownViewModel>().FirstOrDefault(x => x.Id == hotel.TownId).Name;
                 }
 
-                if (!hotel.HotelRooms.Any(x => !x.IsDeleted))
-                {
-                    this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Hotel must have at least one room");
-                }
-
-                if (!hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any(x => !x.IsDeleted))
-                {
-                    this.ModelState.AddModelError(nameof(CreateHotelViewModel.HotelRooms), "Rooms must have at least one price");
-                }
-
                 hotel.Countries = hotel.Countries.Where(x => x.Value != hotel.CountryId.ToString());
                 return this.View(hotel);
             }
 
-            var hotelId = await this.hotelsService.CreateHotel(hotel);
+            var hotelId = await this.hotelsService.Create(hotel);
 
             return this.Redirect($"/Hotels/Details/{hotelId}");
         }
@@ -175,6 +180,19 @@
                 Text = x.Name,
                 Value = x.Id.ToString(),
             });
+            hotel.HotelRooms = hotel.HotelRooms.Where(x => !x.IsDeleted).Select(x => new HotelRoomViewModel()
+            {
+                Id = x.Id,
+                RoomType = x.RoomType,
+                MaxCapacity = x.MaxCapacity,
+                HotelRoomPrices = x.HotelRoomPrices.Where(x => !x.IsDeleted).Select(x => new HotelRoomPriceViewModel()
+                {
+                    Date = x.Date,
+                    PricePerNight = x.PricePerNight,
+                    Id = x.Id,
+                }).ToList(),
+            }).ToList();
+            hotel.ImportedImages = hotel.ImportedImages.Where(x => !x.IsImageDeleted).ToList();
 
             return this.View(hotel);
         }
@@ -182,7 +200,27 @@
         [HttpPost]
         public async Task<IActionResult> Edit(EditHotelViewModel hotel)
         {
-            if (!this.ModelState.IsValid || !hotel.HotelRooms.Any(x => !x.IsDeleted) || !hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any(x => !x.IsDeleted))
+            foreach (var hotelRoom in hotel.HotelRooms.Where(x => !x.IsDeleted))
+            {
+                if (!hotelRoom.HotelRoomPrices.Any(x => !x.IsDeleted))
+                {
+                    this.ModelState.AddModelError(nameof(EditHotelViewModel.HotelRooms), $"Hotel Room Type {hotelRoom.RoomType} must have at least one price");
+                }
+            }
+
+            if (!hotel.HotelRooms.Any(x => !x.IsDeleted))
+            {
+                this.ModelState.AddModelError(nameof(EditHotelViewModel.HotelRooms), "Hotel must have at least one room");
+            }
+
+            if (!hotel.ImportedImages.Any(x => !x.IsImageDeleted))
+            {
+                this.ModelState.AddModelError(nameof(EditHotelViewModel.ImportedImages), "Hotel must have at least one image");
+            }
+
+            var errors = this.ModelState.ErrorCount;
+
+            if (!this.ModelState.IsValid || errors != 0)
             {
                 hotel.Countries = this.countriesService.GetAll<CountryViewModel>().Select(x => new SelectListItem()
                 {
@@ -206,28 +244,20 @@
                     hotel.TownName = this.townsService.GetAll<TownViewModel>().FirstOrDefault(x => x.Id == hotel.TownId).Name;
                 }
 
-                if (!hotel.HotelRooms.Any(x => !x.IsDeleted))
-                {
-                    this.ModelState.AddModelError(nameof(EditHotelViewModel.HotelRooms), "Hotel must have at least one room");
-                }
-
-                if (!hotel.ImportedImages.Any(x => !x.IsImageDeleted))
-                {
-                    this.ModelState.AddModelError(nameof(EditHotelViewModel.ImportedImages), "Hotel must have at least one image");
-                }
-
-                if (!hotel.HotelRooms.SelectMany(x => x.HotelRoomPrices).Any(x => !x.IsDeleted))
-                {
-                    this.ModelState.AddModelError(nameof(EditHotelViewModel.HotelRooms), "Rooms must have at least one price");
-                }
-
                 hotel.Countries = hotel.Countries.Where(x => x.Value != hotel.CountryId.ToString());
                 return this.View(hotel);
             }
 
-            await this.hotelsService.EditHotel(hotel);
+            await this.hotelsService.Edit(hotel);
 
             return this.Redirect($"/Hotels/Details/{hotel.Id}");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.hotelsService.Delete(id);
+
+            return this.Redirect($"/Hotels/All");
         }
     }
 }

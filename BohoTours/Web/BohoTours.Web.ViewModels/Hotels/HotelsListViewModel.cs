@@ -18,7 +18,7 @@
         public string SearchTerm { get; set; }
 
         [Display(Name = "Order by")]
-        public HotelSorting Sorting { get; set; }
+        public Sorting Sorting { get; set; }
 
         public int PageNumber { get; set; }
 

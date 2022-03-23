@@ -4,8 +4,10 @@
     ViewData["Title"] = "Add hotel";
 }
 
-<h1 class="d-flex justify-content-center">Add new hotel</h1>
-
+<div class="text-center m-2">
+    <h1 class="cust-font">Add new hotel</h1>
+</div>
+<hr />
 <form method="post" enctype="multipart/form-data">
 
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -13,7 +15,7 @@
     <div class="form-row">
         <div class="col-md-4 mb-3">
             <label asp-for="Name"></label>
-            <input asp-for="Name" class="form-control"/>
+            <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="col-md-2 mb-3">
@@ -86,12 +88,51 @@
         <button id="addRow" type="button" class="btn btn-info mb-3">Add hotel room</button>
     </div>
     <div id="newRow">
-        <input type="hidden" id="total" value="0" />
+        <input type="hidden" id="total" value="@Model.HotelRooms.Count" />
+        @{
+            var count = 0;
+            @foreach (var room in Model.HotelRooms)
+            {
+                <div id="inputRow">
+                    <input type="hidden" id="thisHotelCount" value="@count" />
+                    <label class="mr-2">Room Type</label>
+                    <input type="text" name="hotelRooms[@count].RoomType" class="mr-2" value="@room.RoomType" />
+                    <input type="hidden" name="hotelRooms[@count].Id" class="mr-2" value="@room.Id" />
+                    <label class="mr-2">Max Capacity</label>
+                    <input type="number" name="hotelRooms[@count].MaxCapacity" class="mr-2" value="@room.MaxCapacity" />
+                    <button id="addPrice" type="button" class="btn btn-info mb-2 mr-2">Add room price</button>
+                    <button id="removeRow" type="button" class="btn btn-danger mb-2">Remove</button>
+                    <input type="hidden" name="hotelRooms[@count].IsDeleted" value="false" />
+                    <input type="hidden" id="totalPrices" value="@room.HotelRoomPrices.Count" />
+                    <h5>Room prices per days</h5>
+                    <hr>
+                    @{
+                        var roomPriceCount = 0;
+                        foreach (var roomPrice in room.HotelRoomPrices)
+                        {
+                            <div id="inputRowPrice">
+                                <input type="hidden" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].Id" value="@roomPrice.Id" />
+                                <label class="mr-2">Date</label>
+                                <input type="date" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].Date" class="mr-2" value="@roomPrice.Date.ToString("yyyy-MM-dd")" />
+                                <label class="mr-2">PricePerNight</label>
+                                <input type="number" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].PricePerNight" class="mr-2" value="@roomPrice.PricePerNight" />
+                                <button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>
+                                <input type="hidden" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].IsDeleted" value="false" />
+                            </div>
+
+                            roomPriceCount++;
+                        }
+                    }
+                </div>
+
+                count++;
+            }
+        }
     </div>
     <hr />
     <div class="d-flex justify-content-center">
-        <input type="submit" class="btn btn-primary btn-lg mr-3" value="Add hotel" />
-        <a type="submit" class="btn btn-secondary btn-lg" asp-action="Create">Clear</a>
+        <button class="btn btn-primary btn-lg mr-3"> <i class="fa fa-floppy-o"></i> Add hotel</button>
+        <a type="submit" class="btn btn-secondary btn-lg" asp-controller="Hotels"  asp-action="Create"><i class="fa fa-refresh"></i> Clear</a>
     </div>
 </form>
 

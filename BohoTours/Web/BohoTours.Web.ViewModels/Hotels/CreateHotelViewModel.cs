@@ -42,6 +42,6 @@
 
         public IEnumerable<SelectListItem> Continents { get; set; }
 
-        public IEnumerable<HotelRoomViewModel> HotelRooms { get; set; } = new List<HotelRoomViewModel>();
+        public ICollection<HotelRoomViewModel> HotelRooms { get; set; } = new List<HotelRoomViewModel>();
     }
 }

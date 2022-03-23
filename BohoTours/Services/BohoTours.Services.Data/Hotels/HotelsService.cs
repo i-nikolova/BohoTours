@@ -33,7 +33,7 @@
 
         public IEnumerable<T> GetAll<T>()
         {
-            return this.hotelsRepository.AllAsNoTracking().OrderByDescending(x => x.Id).To<T>().ToList();
+            return this.hotelsRepository.AllAsNoTracking().Where(x => !x.IsDeleted).OrderByDescending(x => x.Id).To<T>().ToList();
         }
 
         public IEnumerable<string> GetAllHotelTowns()
@@ -58,15 +58,15 @@
 
         public int GetCount()
         {
-            return this.hotelsRepository.AllAsNoTracking().Count();
+            return this.hotelsRepository.AllAsNoTracking().Where(x => !x.IsDeleted).Count();
         }
 
         public T GetById<T>(int id)
         {
-            return this.hotelsRepository.AllAsNoTracking().Where(x => x.Id == id).To<T>().FirstOrDefault();
+            return this.hotelsRepository.AllAsNoTracking().Where(x => x.Id == id && !x.IsDeleted).To<T>().FirstOrDefault();
         }
 
-        public async Task<int> CreateHotel(CreateHotelViewModel hotelModel)
+        public async Task<int> Create(CreateHotelViewModel hotelModel)
         {
             var imageUrls = await CloudinaryExtension.UploadAsync(this.cloudinary, hotelModel.Images);
 
@@ -100,7 +100,7 @@
             return hotel.Id;
         }
 
-        public async Task EditHotel(EditHotelViewModel hotelModel)
+        public async Task Edit(EditHotelViewModel hotelModel)
         {
             var hotel = this.hotelsRepository.All().FirstOrDefault(x => x.Id == hotelModel.Id);
 
@@ -127,10 +127,10 @@
                     {
                         foreach (var roomPrice in this.hotelRoomsPricesRepository.All().Where(x => x.RoomId == existingRoom.Id))
                         {
-                            this.hotelRoomsPricesRepository.HardDelete(roomPrice);
+                            this.hotelRoomsPricesRepository.Delete(roomPrice);
                         }
 
-                        this.hotelRoomsRepository.HardDelete(existingRoom);
+                        this.hotelRoomsRepository.Delete(existingRoom);
                     }
                     else
                     {
@@ -153,7 +153,7 @@
                             {
                                 if (roomPrice.IsDeleted)
                                 {
-                                    this.hotelRoomsPricesRepository.HardDelete(existingRoomPrice);
+                                    this.hotelRoomsPricesRepository.Delete(existingRoomPrice);
                                 }
                             }
                         }
@@ -174,7 +174,7 @@
 
                     if (image.IsImageDeleted)
                     {
-                        this.hotelImagesRepository.HardDelete(existingImage);
+                        this.hotelImagesRepository.Delete(existingImage);
                     }
                 }
 
@@ -199,6 +199,30 @@
                 this.hotelsRepository.Update(hotel);
                 await this.hotelsRepository.SaveChangesAsync();
             }
+        }
+
+        public async Task Delete(int hotelId)
+        {
+            var hotel = this.hotelsRepository.All().FirstOrDefault(x => x.Id == hotelId);
+
+            this.hotelsRepository.Delete(hotel);
+
+            foreach (var image in hotel.HotelImages)
+            {
+                this.hotelImagesRepository.Delete(image);
+            }
+
+            foreach (var room in hotel.HotelRooms)
+            {
+                foreach (var roomPrice in room.HotelRoomPrices)
+                {
+                    this.hotelRoomsPricesRepository.Delete(roomPrice);
+                }
+
+                this.hotelRoomsRepository.Delete(room);
+            }
+
+            await this.hotelsRepository.SaveChangesAsync();
         }
     }
 }

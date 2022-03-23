@@ -10,6 +10,8 @@
     using BohoTours.Data.Seeding;
     using BohoTours.Services.Data;
     using BohoTours.Services.Data.Hotels;
+    using BohoTours.Services.Data.Transports;
+    using BohoTours.Services.Data.Vacations;
     using BohoTours.Services.Mapping;
     using BohoTours.Services.Messaging;
     using BohoTours.Web.ViewModels;
@@ -65,6 +67,8 @@
             services.AddTransient<IHotelsService, HotelsService>();
             services.AddTransient<ITownsService, TownsService>();
             services.AddTransient<IContinentsService, ContinentsService>();
+            services.AddTransient<ITransportsService, TransportsService>();
+            services.AddTransient<IVacationsService, VacationsService>();
             services.AddTransient<ICountriesService, CountriesService>();
             services.AddTransient<AngleSharp.Html.Parser.HtmlParser>();
             services.AddTransient<System.Net.Http.HttpClient>();

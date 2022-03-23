@@ -37,7 +37,7 @@
         {
             configuration.CreateMap<Hotel, SingleHotelViewModel>()
                 .ForMember(m => m.CountryName, opt => opt.MapFrom(x => x.Town.Country.Name))
-                .ForMember(m => m.Images, opt => opt.MapFrom(hi => hi.HotelImages.Select(x => x.ImageUrl)))
+                .ForMember(m => m.Images, opt => opt.MapFrom(hi => hi.HotelImages.Where(x => !x.IsDeleted).Select(x => x.ImageUrl)))
                 .ForMember(
                     m => m.RoomMinPrice,
                     opt => opt.MapFrom(x => x.HotelRooms.SelectMany(r => r.HotelRoomPrices).Min(hrp => hrp.PricePerNight)));

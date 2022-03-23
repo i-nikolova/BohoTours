@@ -7,6 +7,7 @@
     using System.Text;
 
     using AutoMapper;
+    using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
     using Microsoft.AspNetCore.Http;
@@ -16,16 +17,23 @@
     {
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(DataConstants.HotelNameMaxLength, MinimumLength = DataConstants.HotelNameMinLength)]
         public string Name { get; set; }
 
+        [Required]
         public string LAT { get; set; }
 
+        [Required]
         public string LON { get; set; }
 
+        [Required]
+        [StringLength(DataConstants.DescriptionMaxLength, MinimumLength = DataConstants.DescriptionMixLength)]
         public string Description { get; set; }
 
         public string ImagePath { get; set; }
 
+        [Required]
         public int TownId { get; set; }
 
         public string TownName { get; set; }
@@ -42,6 +50,7 @@
 
         public ICollection<IFormFile> Images { get; set; }
 
+        [Required]
         public ICollection<ImportedImagesViewModel> ImportedImages { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }

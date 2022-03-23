@@ -25,10 +25,17 @@
         [Required]
         public string Description { get; set; }
 
+        [Required]
+        public string ImagePath { get; set; }
+
         public int TransportId { get; set; }
 
         public Transport Transport { get; set; }
 
         public ICollection<Town> TownsVisited { get; set; } = new HashSet<Town>();
+
+        public ICollection<VacationPrice> VacationPrices { get; set; } = new HashSet<VacationPrice>();
+
+        public ICollection<VacationImages> VacationImages { get; set; } = new HashSet<VacationImages>();
     }
 }

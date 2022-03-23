@@ -73,7 +73,6 @@
         background: transparent;
         position: absolute;
         right: 0;
-        z-index: 9;
         padding: 7px;
         height: 100%;
     }
@@ -241,7 +240,6 @@
         border-radius: 50%;
         position: relative;
         top: -15px;
-        z-index: 1;
     }
 
 .navbar .checkbox-inline {

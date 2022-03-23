@@ -491,6 +491,10 @@ namespace BohoTours.Data.Migrations
                     b.Property<byte>("Duration")
                         .HasColumnType("tinyint");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -514,6 +518,77 @@ namespace BohoTours.Data.Migrations
                     b.HasIndex("TransportId");
 
                     b.ToTable("Vacation");
+                });
+
+            modelBuilder.Entity("BohoTours.Data.Models.VacationImages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("VacationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("VacationId");
+
+                    b.ToTable("VacationImages");
+                });
+
+            modelBuilder.Entity("BohoTours.Data.Models.VacationPrice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("VacationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("VacationId");
+
+                    b.ToTable("VacationPrice");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -720,6 +795,28 @@ namespace BohoTours.Data.Migrations
                     b.Navigation("Transport");
                 });
 
+            modelBuilder.Entity("BohoTours.Data.Models.VacationImages", b =>
+                {
+                    b.HasOne("BohoTours.Data.Models.Vacation", "Vacation")
+                        .WithMany("VacationImages")
+                        .HasForeignKey("VacationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Vacation");
+                });
+
+            modelBuilder.Entity("BohoTours.Data.Models.VacationPrice", b =>
+                {
+                    b.HasOne("BohoTours.Data.Models.Vacation", "Vacation")
+                        .WithMany("VacationPrices")
+                        .HasForeignKey("VacationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Vacation");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("BohoTours.Data.Models.ApplicationRole", null)
@@ -815,6 +912,13 @@ namespace BohoTours.Data.Migrations
             modelBuilder.Entity("BohoTours.Data.Models.Town", b =>
                 {
                     b.Navigation("Hotels");
+                });
+
+            modelBuilder.Entity("BohoTours.Data.Models.Vacation", b =>
+                {
+                    b.Navigation("VacationImages");
+
+                    b.Navigation("VacationPrices");
                 });
 #pragma warning restore 612, 618
         }

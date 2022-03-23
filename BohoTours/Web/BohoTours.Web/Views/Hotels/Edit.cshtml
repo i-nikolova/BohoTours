@@ -4,8 +4,10 @@
     ViewData["Title"] = "Edit hotel";
 }
 
-<h1 class="d-flex justify-content-center">Edit hotel</h1>
-
+<div class="text-center m-2">
+    <h1 class="cust-font">Edit hotel</h1>
+</div>
+<hr />
 <form method="post" enctype="multipart/form-data">
 
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -145,8 +147,8 @@
 
     <hr />
     <div class="d-flex justify-content-center">
-        <input type="submit" class="btn btn-primary btn-lg mr-3" value="Save changes" />
-        <a type="submit" class="btn btn-secondary btn-lg" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+        <button class="btn btn-primary btn-lg mr-3"> <i class="fa fa-floppy-o"></i> Save changes</button>
+        <a type="submit" class="btn btn-secondary btn-lg" asp-action="Details" asp-route-id="@Model.Id"> <i class="fa fa-ban"></i> Cancel</a>
     </div>
 </form>
 
@@ -203,7 +205,6 @@
 @section Scripts {
 
     <script>
-        style
 
         $(document).off('focusin.modal');
         $('#TownId').change(function () {

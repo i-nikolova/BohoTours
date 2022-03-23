@@ -19,8 +19,10 @@
 
         T GetById<T>(int id);
 
-        Task<int> CreateHotel(CreateHotelViewModel hotel);
+        Task<int> Create(CreateHotelViewModel hotel);
 
-        Task EditHotel(EditHotelViewModel hotel);
+        Task Edit(EditHotelViewModel hotel);
+
+        Task Delete(int hotelId);
     }
 }
