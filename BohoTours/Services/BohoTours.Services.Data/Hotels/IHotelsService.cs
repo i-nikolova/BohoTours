@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using BohoTours.Web.ViewModels.Hotels;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
     public interface IHotelsService
@@ -20,6 +21,6 @@
 
         Task<int> CreateHotel(CreateHotelViewModel hotel);
 
-        Task<int> EditHotel(EditHotelViewModel hotel);
+        Task EditHotel(EditHotelViewModel hotel);
     }
 }

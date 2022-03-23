@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using BohoTours.Data.Common.Repositories;
-using BohoTours.Data.Models;
-using BohoTours.Services.Mapping;
-
-namespace BohoTours.Services.Data.Hotels
+﻿namespace BohoTours.Services.Data.Hotels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using BohoTours.Data.Common.Repositories;
+    using BohoTours.Data.Models;
+    using BohoTours.Services.Mapping;
+
     public class ContinentsService : IContinentsService
     {
         private readonly IDeletableEntityRepository<Continent> continentsRepository;
@@ -21,6 +22,5 @@ namespace BohoTours.Services.Data.Hotels
         {
             return this.continentsRepository.AllAsNoTracking().To<T>().ToList();
         }
-
     }
 }

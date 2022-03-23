@@ -40,7 +40,6 @@
 
         public ICollection<HotelRoomViewModel> HotelRooms { get; set; } = new List<HotelRoomViewModel>();
 
-        [Required]
         public ICollection<IFormFile> Images { get; set; }
 
         public ICollection<ImportedImagesViewModel> ImportedImages { get; set; }
@@ -56,7 +55,7 @@
                 .ForMember(m => m.CountryId, opt => opt.MapFrom(x => x.Town.Country.Id))
                 .ForMember(m => m.ContinentId, opt => opt.MapFrom(x => x.Town.Country.ContinentId))
                 .ForMember(m => m.ContinentId, opt => opt.MapFrom(x => x.Town.Country.Continent.Id))
-                .ForMember(m => m.ImportedImages, opt => opt.MapFrom(hi => hi.HotelImages.Select(x => x.ImageUrl)));
+                .ForMember(m => m.ImportedImages, opt => opt.MapFrom(hi => hi.HotelImages));
         }
     }
 }

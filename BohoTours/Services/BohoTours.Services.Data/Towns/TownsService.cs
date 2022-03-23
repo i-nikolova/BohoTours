@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BohoTours.Data.Common.Repositories;
-using BohoTours.Data.Models;
-using BohoTours.Services.Mapping;
-
-namespace BohoTours.Services.Data.Hotels
+﻿namespace BohoTours.Services.Data.Hotels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using BohoTours.Data.Common.Repositories;
+    using BohoTours.Data.Models;
+    using BohoTours.Services.Mapping;
+
     public class TownsService : ITownsService
     {
         private readonly IDeletableEntityRepository<Town> townsRepository;
@@ -23,7 +24,7 @@ namespace BohoTours.Services.Data.Hotels
             return this.townsRepository.AllAsNoTracking().To<T>().ToList();
         }
 
-        public async Task<(int id, string name)> Create(int countryId, string name)
+        public async Task<(int Id, string Name)> Create(int countryId, string name)
         {
             var town = new Town()
             {

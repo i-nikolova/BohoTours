@@ -18,6 +18,6 @@
 
         public int MaxCapacity { get; set; }
 
-        public IEnumerable<HotelRoomPrice> HotelRoomPrices { get; set; } = new HashSet<HotelRoomPrice>();
+        public ICollection<HotelRoomPrice> HotelRoomPrices { get; set; } = new HashSet<HotelRoomPrice>();
     }
 }

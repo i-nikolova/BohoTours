@@ -16,37 +16,51 @@
             <input asp-for="Name" class="form-control" value="@Model.Name" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3">
             <label class="mb-2 mr-sm-2" asp-for="LAT"></label>
             <input asp-for="LAT" class="form-control" value="@Model.LAT" />
             <span asp-validation-for="LAT" class="text-danger"></span>
         </div>
-        <div class="col-md-2 mb-3">
+        <div class="col-md-3 mb-3">
             <label class="mb-2 mr-sm-2" asp-for="LON"></label>
             <input asp-for="LON" class="form-control" value="@Model.LON" />
             <span asp-validation-for="LON" class="text-danger"></span>
         </div>
-        <div class="col-md-4 mb-3">
-            <label asp-for="Images"></label>
-            <input asp-for="Images" class="form-inline" />
-            <span asp-validation-for="Images" class="text-danger"></span>
+        <div class="col-md-2 myImg">
+            <label class="mb-2 mr-sm-2" asp-for="ImagePath"></label>
+            <input hidden asp-for="ImagePath" class="form-control" value="@Model.ImagePath" />
+            <img src="@Model.ImagePath" class="w-100">
         </div>
     </div>
     <div class="form-row">
         <div class="small-pictures col-md-12 mb-3">
             <section id="gallery" class="row no-gutters">
-                @foreach (var image in Model.ImportedImages)
-                {
-                    <div class="myImg col-md-2 position-relative">
-                        <img src="@image.ImageUrl" class="w-100">
-                        <a onclick="this.parentElement.style.display = 'none'" class="btn btn-danger button_class">Delete</a>
-                    </div>
+                @{
+                    var imagesCount = 0;
+                    @foreach (var image in Model.ImportedImages)
+                    {
+                        <div class="col-md-2 position-relative" name="isDeleted">
+                            <img src="@image.ImageUrl" class="w-100">
+                            <input type="hidden" name="ImportedImages[@imagesCount].ImageUrl" value="@image.ImageUrl" />
+                            <input type="hidden" name="ImportedImages[@imagesCount].Id" value="@image.Id" />
+                            <a onclick="this.parentElement.style.display = 'none';$(this).next().attr('value',true)" class="btn btn-danger button_class">Delete</a>
+                            <input type="hidden" name="ImportedImages[@imagesCount].IsImageDeleted" value="false" />
+                            <a onclick="$('#ImagePath').attr('value', '@image.ImageUrl');$('#ImagePath').next().attr('src', '@image.ImageUrl')" id="changeCover" class="btn btn-success button_left_class">Make cover</a>
+                        </div>
 
+                        imagesCount++;
+                    }
                 }
             </section>
         </div>
-
     </div>
+
+    <div class="form-row">
+        <label asp-for="Images"></label>
+        <input asp-for="Images" class="form-inline" />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+
     <div class="form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" rows="5" value="@Model.Description"></textarea>
@@ -87,38 +101,42 @@
         <button id="addRow" type="button" class="btn btn-info mb-3">Add hotel room</button>
     </div>
     <div id="newRow">
-        <input type="hidden" id="total" value="0" />
+        <input type="hidden" id="total" value="@Model.HotelRooms.Count" />
         @{
             var count = 0;
             @foreach (var room in Model.HotelRooms)
             {
                 <div id="inputRow">
                     <input type="hidden" id="thisHotelCount" value="@count" />
-                    <input type="hidden" id="isDeleted" value="0" />
                     <label class="mr-2">Room Type</label>
                     <input type="text" name="hotelRooms[@count].RoomType" class="mr-2" value="@room.RoomType" />
+                    <input type="hidden" name="hotelRooms[@count].Id" class="mr-2" value="@room.Id" />
                     <label class="mr-2">Max Capacity</label>
                     <input type="number" name="hotelRooms[@count].MaxCapacity" class="mr-2" value="@room.MaxCapacity" />
                     <button id="addPrice" type="button" class="btn btn-info mb-2 mr-2">Add room price</button>
                     <button id="removeRow" type="button" class="btn btn-danger mb-2">Remove</button>
+                    <input type="hidden" name="hotelRooms[@count].IsDeleted" value="false" />
                     <input type="hidden" id="totalPrices" value="@room.HotelRoomPrices.Count" />
                     <h5>Room prices per days</h5>
                     <hr>
-                </div>
-                var roomPriceCount = 0;
-                foreach (var roomPrice in room.HotelRoomPrices)
-                {
-                    <div id="inputRowPrice">
-                        <input type="hidden" id="isDeleted" value="0" />
-                        <label class="mr-2">Date</label>
-                        <input type="date" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].Date" class="mr-2" value="@roomPrice.Date.ToString("yyyy-MM-dd")" />
-                        <label class="mr-2">PricePerNight</label>
-                        <input type="number" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].PricePerNight" class="mr-2" value="@roomPrice.PricePerNight" />
-                        <button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>
-                    </div>
+                    @{
+                        var roomPriceCount = 0;
+                        foreach (var roomPrice in room.HotelRoomPrices)
+                        {
+                            <div id="inputRowPrice">
+                                <input type="hidden" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].Id" value="@roomPrice.Id" />
+                                <label class="mr-2">Date</label>
+                                <input type="date" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].Date" class="mr-2" value="@roomPrice.Date.ToString("yyyy-MM-dd")" />
+                                <label class="mr-2">PricePerNight</label>
+                                <input type="number" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].PricePerNight" class="mr-2" value="@roomPrice.PricePerNight" />
+                                <button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>
+                                <input type="hidden" name="HotelRooms[@count].HotelRoomPrices[@roomPriceCount].IsDeleted" value="false" />
+                            </div>
 
-                    roomPriceCount++;
-                }
+                            roomPriceCount++;
+                        }
+                    }
+                </div>
 
                 count++;
             }
@@ -185,6 +203,7 @@
 @section Scripts {
 
     <script>
+        style
 
         $(document).off('focusin.modal');
         $('#TownId').change(function () {
@@ -328,7 +347,6 @@
                 var html = '';
                 html += '<div id="inputRow">';
                 html += '<input type="hidden" id="thisHotelCount" value="' + (rowCount - 1) + '" />';
-                html += '<input type="hidden" id="isDeleted" value="0" />';
                 html += '<label class="mr-2">Room Type</label>';
                 html += '<input type="text" name="hotelRooms[' + (rowCount - 1) + '].RoomType" class="mr-2" value=" "/>';
                 html += '<label class="mr-2">Max Capacity</label>';
@@ -336,11 +354,11 @@
                 //add more inputs here...
                 html += '<button id="addPrice" type="button" class="btn btn-info mb-2 mr-2">Add room price</button>';
                 html += '<button id="removeRow" type="button" class="btn btn-danger mb-2">Remove</button>';
+                html += '<input type="hidden" name="hotelRooms[' + (rowCount - 1) + '].IsDeleted" value="false" />';
                 html += '<input type="hidden" id="totalPrices" value="0" />';
                 html += '<h5>Room prices per days</h5>';
                 html += '<hr>';
                 html += '</div>';
-
 
                 $('#newRow').append(html);
 
@@ -349,7 +367,7 @@
             '#removeRow',
             function() {
                 $(this).closest('#inputRow').addClass("d-none");
-                $(this).siblings('#isDeleted').val(1);
+                $(this).next().attr('value','true');
 
             });
 
@@ -363,13 +381,13 @@
 
                 var rowHtml = '';
                 rowHtml += '<div id="inputRowPrice">';
-                rowHtml += '<input type="hidden" id="isDeleted" value="0" />';
                 rowHtml += '<label class="mr-2">Date</label>';
                 rowHtml += '<input type="date" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].Date" class="mr-2" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")"/>';
                 rowHtml += '<label class="mr-2">PricePerNight</label>';
                 rowHtml += '<input type="number" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].PricePerNight" class="mr-2" value="0.00"/>';
                 //add more inputs here...
                 rowHtml += '<button id="removePriceRow" type="button" class="btn btn-danger mb-2">Remove</button>';
+                rowHtml += '<input type="hidden" name="HotelRooms[' + roomNumber + '].HotelRoomPrices[' + (rowPriceCount - 1) + '].IsDeleted" value="false" />';
                 rowHtml += '</div>';
 
                 $(this).closest('#inputRow').append(rowHtml);
@@ -378,7 +396,7 @@
             '#removePriceRow',
             function() {
                 $(this).closest('#inputRowPrice').addClass("d-none");
-                $(this).siblings('#isDeleted').val(1);
+                $(this).next().attr('value', 'true');
             });
     </script>
     <script>

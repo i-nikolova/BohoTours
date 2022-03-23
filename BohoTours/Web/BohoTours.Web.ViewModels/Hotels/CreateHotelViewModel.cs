@@ -1,11 +1,7 @@
-﻿using BohoTours.Data.Models;
-
-namespace BohoTours.Web.ViewModels.Hotels
+﻿namespace BohoTours.Web.ViewModels.Hotels
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
 
     using BohoTours.Data.Common.Constants;
     using Microsoft.AspNetCore.Http;

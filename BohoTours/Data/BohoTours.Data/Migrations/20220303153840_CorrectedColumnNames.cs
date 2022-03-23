@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BohoTours.Data.Migrations
+﻿namespace BohoTours.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class CorrectedColumnNames : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +33,7 @@ namespace BohoTours.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -53,7 +54,7 @@ namespace BohoTours.Data.Migrations
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -77,7 +78,7 @@ namespace BohoTours.Data.Migrations
                 columns: table => new
                 {
                     TownsVisitedId = table.Column<int>(type: "int", nullable: false),
-                    VacationsId = table.Column<int>(type: "int", nullable: false)
+                    VacationsId = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

@@ -1183,3 +1183,8 @@ img {
     bottom: 0;
     right: 0;
 }
+.button_left_class {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

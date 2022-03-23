@@ -1,18 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace BohoTours.Web.ViewModels.Hotels
+﻿namespace BohoTours.Web.ViewModels.Hotels
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-    using System.Text;
 
-    using AutoMapper;
-    using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
-    using BohoTours.Services.Mapping;
 
     public class HotelsListViewModel
     {
