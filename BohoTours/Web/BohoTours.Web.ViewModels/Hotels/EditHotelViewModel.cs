@@ -51,7 +51,7 @@
         public ICollection<IFormFile> Images { get; set; }
 
         [Required]
-        public ICollection<ImportedImagesViewModel> ImportedImages { get; set; }
+        public ICollection<ImportedHotelsImagesViewModel> ImportedImages { get; set; }
 
         public IEnumerable<SelectListItem> Countries { get; set; }
 
@@ -63,7 +63,6 @@
                 .ForMember(m => m.CountryName, opt => opt.MapFrom(x => x.Town.Country.Name))
                 .ForMember(m => m.CountryId, opt => opt.MapFrom(x => x.Town.Country.Id))
                 .ForMember(m => m.ContinentId, opt => opt.MapFrom(x => x.Town.Country.ContinentId))
-                .ForMember(m => m.ContinentId, opt => opt.MapFrom(x => x.Town.Country.Continent.Id))
                 .ForMember(m => m.ImportedImages, opt => opt.MapFrom(hi => hi.HotelImages));
         }
     }

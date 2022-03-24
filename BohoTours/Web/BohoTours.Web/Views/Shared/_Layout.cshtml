@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/css/bootstrap-select.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -105,12 +106,12 @@
                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> @User.Identity.Name<b class="caret"></b></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a href="#" class="dropdown-item" ><i class="fa fa-user-o"></i> Profile</a>
-                                <a href="#" class="dropdown-item" ><i class="fa fa-calendar-o"></i> My bookings</a>
-                                <a href="#" class="dropdown-item" ><i class="fa fa-calendar-o"></i> Clients bookings</a>
-                                <a href="#" class="dropdown-item" ><i class="fa fa-sliders"></i> Settings</a>
+                                <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a>
+                                <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> My bookings</a>
+                                <a href="#" class="dropdown-item"><i class="fa fa-calendar-o"></i> Clients bookings</a>
+                                <a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Settings</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:{}" onclick="document.getElementById('logout').submit();return false;" class="dropdown-item" ><i class="material-icons">&#xE8AC;</i> Logout</a>
+                                <a href="javascript:{}" onclick="document.getElementById('logout').submit();return false;" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a>
                                 <form id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
                                 </form>
                             </div>
@@ -178,13 +179,18 @@
             </div>
         </footer>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/e3daaa3d52.js" crossorigin="anonymous"></script>
+
+
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

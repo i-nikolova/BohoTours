@@ -1186,3 +1186,6 @@ img {
     bottom: 0;
     left: 0;
 }
+.btn-light:hover{
+    color:white;
+}
