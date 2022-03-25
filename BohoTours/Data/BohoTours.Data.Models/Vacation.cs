@@ -26,6 +26,9 @@
         public string Description { get; set; }
 
         [Required]
+        public string Summary { get; set; }
+
+        [Required]
         public string ImagePath { get; set; }
 
         public int TransportId { get; set; }
@@ -37,5 +40,7 @@
         public ICollection<VacationPrice> VacationPrices { get; set; } = new HashSet<VacationPrice>();
 
         public ICollection<VacationImages> VacationImages { get; set; } = new HashSet<VacationImages>();
+
+        public ICollection<VacationRatings> VacationsRatings { get; set; } = new HashSet<VacationRatings>();
     }
 }

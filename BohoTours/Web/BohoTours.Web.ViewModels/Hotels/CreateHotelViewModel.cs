@@ -18,9 +18,11 @@
         public string Description { get; set; }
 
         [Required]
+        [Display(Name = "Town")]
         public int TownId { get; set; }
 
         [Required]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         public int ContinentId { get; set; }

@@ -8,6 +8,7 @@
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using BohoTours.Web.ViewModels.Feedbacks;
 
     public class SingleHotelViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {
@@ -26,6 +27,8 @@
         public string TownName { get; set; }
 
         public string CountryName { get; set; }
+
+        public FeedbackViewModel Feedback { get; set; }
 
         public ICollection<HotelRoomViewModel> HotelRooms { get; set; } = new List<HotelRoomViewModel>();
 

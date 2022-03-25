@@ -40,6 +40,14 @@
 
         public DbSet<HotelImages> HotelImages { get; set; }
 
+        public DbSet<VacationImages> VacationImages { get; set; }
+
+        public DbSet<VacationPrice> VacationPrices { get; set; }
+
+        public DbSet<HotelRatings> HotelRatings { get; set; }
+
+        public DbSet<VacationRatings> VacationRatings { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

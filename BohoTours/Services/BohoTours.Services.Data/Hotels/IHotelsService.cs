@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
+    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore.Migrations.Operations;
@@ -24,5 +24,7 @@
         Task Edit(EditHotelViewModel hotel);
 
         Task Delete(int hotelId);
+
+        Task AddFeedback(FeedbackViewModel feedback);
     }
 }

@@ -31,5 +31,7 @@
         public ICollection<HotelRoom> HotelRooms { get; set; } = new HashSet<HotelRoom>();
 
         public ICollection<HotelImages> HotelImages { get; set; } = new HashSet<HotelImages>();
+
+        public ICollection<HotelRatings> HotelRatings { get; set; } = new HashSet<HotelRatings>();
     }
 }

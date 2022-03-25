@@ -10,6 +10,7 @@
     using BohoTours.Data.Models;
     using BohoTours.Services.Data.CloudinaryHelper;
     using BohoTours.Services.Mapping;
+    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using CloudinaryDotNet;
 
@@ -19,16 +20,18 @@
         private readonly IDeletableEntityRepository<HotelRoom> hotelRoomsRepository;
         private readonly IDeletableEntityRepository<HotelRoomPrice> hotelRoomsPricesRepository;
         private readonly IDeletableEntityRepository<HotelImages> hotelImagesRepository;
+        private readonly IDeletableEntityRepository<HotelRatings> hotelRatingsRepository;
 
         private readonly Cloudinary cloudinary;
 
-        public HotelsService(IDeletableEntityRepository<Hotel> hotelsRepository, IDeletableEntityRepository<HotelRoom> hotelRoomsRepository, IDeletableEntityRepository<HotelRoomPrice> hotelRoomsPricesRepository, IDeletableEntityRepository<HotelImages> hotelImagesRepository, Cloudinary cloudinary)
+        public HotelsService(IDeletableEntityRepository<Hotel> hotelsRepository, IDeletableEntityRepository<HotelRoom> hotelRoomsRepository, IDeletableEntityRepository<HotelRoomPrice> hotelRoomsPricesRepository, IDeletableEntityRepository<HotelImages> hotelImagesRepository, Cloudinary cloudinary, IDeletableEntityRepository<HotelRatings> hotelRatingsRepository)
         {
             this.hotelsRepository = hotelsRepository;
             this.hotelRoomsRepository = hotelRoomsRepository;
             this.hotelRoomsPricesRepository = hotelRoomsPricesRepository;
             this.hotelImagesRepository = hotelImagesRepository;
             this.cloudinary = cloudinary;
+            this.hotelRatingsRepository = hotelRatingsRepository;
         }
 
         public IEnumerable<T> GetAll<T>()
@@ -222,6 +225,21 @@
                 this.hotelRoomsRepository.Delete(room);
             }
 
+            await this.hotelsRepository.SaveChangesAsync();
+        }
+
+        public async Task AddFeedback(FeedbackViewModel feedback)
+        {
+            var hotel = this.hotelsRepository.All().FirstOrDefault(x => x.Id == feedback.HotelId);
+            hotel.HotelRatings.Add(new HotelRatings()
+            {
+                Name = feedback.Name,
+                Email = feedback.Email,
+                Message = feedback.Message,
+                Rating = feedback.Rating,
+            });
+
+            this.hotelsRepository.Update(hotel);
             await this.hotelsRepository.SaveChangesAsync();
         }
     }

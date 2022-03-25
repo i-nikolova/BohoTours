@@ -296,6 +296,52 @@ namespace BohoTours.Data.Migrations
                     b.ToTable("HotelImages");
                 });
 
+            modelBuilder.Entity("BohoTours.Data.Models.HotelRatings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("HotelRatings");
+                });
+
             modelBuilder.Entity("BohoTours.Data.Models.HotelRoom", b =>
                 {
                     b.Property<int>("Id")
@@ -506,6 +552,10 @@ namespace BohoTours.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TransportId")
                         .HasColumnType("int");
 
@@ -588,7 +638,53 @@ namespace BohoTours.Data.Migrations
 
                     b.HasIndex("VacationId");
 
-                    b.ToTable("VacationPrice");
+                    b.ToTable("VacationPrices");
+                });
+
+            modelBuilder.Entity("BohoTours.Data.Models.VacationRatings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VacationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("VacationId");
+
+                    b.ToTable("VacationRatings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -743,6 +839,17 @@ namespace BohoTours.Data.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("BohoTours.Data.Models.HotelRatings", b =>
+                {
+                    b.HasOne("BohoTours.Data.Models.Hotel", "Hotel")
+                        .WithMany("HotelRatings")
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+                });
+
             modelBuilder.Entity("BohoTours.Data.Models.HotelRoom", b =>
                 {
                     b.HasOne("BohoTours.Data.Models.Hotel", "Hotel")
@@ -810,6 +917,17 @@ namespace BohoTours.Data.Migrations
                 {
                     b.HasOne("BohoTours.Data.Models.Vacation", "Vacation")
                         .WithMany("VacationPrices")
+                        .HasForeignKey("VacationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Vacation");
+                });
+
+            modelBuilder.Entity("BohoTours.Data.Models.VacationRatings", b =>
+                {
+                    b.HasOne("BohoTours.Data.Models.Vacation", "Vacation")
+                        .WithMany("VacationsRatings")
                         .HasForeignKey("VacationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -901,6 +1019,8 @@ namespace BohoTours.Data.Migrations
                 {
                     b.Navigation("HotelImages");
 
+                    b.Navigation("HotelRatings");
+
                     b.Navigation("HotelRooms");
                 });
 
@@ -919,6 +1039,8 @@ namespace BohoTours.Data.Migrations
                     b.Navigation("VacationImages");
 
                     b.Navigation("VacationPrices");
+
+                    b.Navigation("VacationsRatings");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,10 +10,12 @@
     using BohoTours.Services.Data.Hotels;
     using BohoTours.Web.ViewModels.Continenst;
     using BohoTours.Web.ViewModels.Countries;
+    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using BohoTours.Web.ViewModels.Towns;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
     public class HotelsController : Controller
@@ -87,9 +89,23 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, FeedbackViewModel feedback)
         {
+            if (feedback.HotelId != 0)
+            {
+                id = feedback.HotelId;
+            }
+
             var hotel = this.hotelsService.GetById<SingleHotelViewModel>(id);
+
+            if (feedback == null)
+            {
+                hotel.Feedback = new FeedbackViewModel();
+            }
+            else
+            {
+                hotel.Feedback = feedback;
+            }
 
             this.ViewData["Title"] = hotel.Name;
 
@@ -258,6 +274,18 @@
             await this.hotelsService.Delete(id);
 
             return this.Redirect($"/Hotels/All");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveFeedback(FeedbackViewModel feedback)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction($"Details", new RouteValueDictionary(feedback));
+            }
+
+            await this.hotelsService.AddFeedback(feedback);
+            return this.RedirectToAction($"Details", new { id=feedback.HotelId});
         }
     }
 }

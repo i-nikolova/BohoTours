@@ -31,13 +31,17 @@
         [StringLength(DataConstants.DescriptionMaxLength, MinimumLength = DataConstants.DescriptionMixLength)]
         public string Description { get; set; }
 
+        [Display(Name = "Cover image")]
         public string ImagePath { get; set; }
 
         [Required]
+        [Display(Name="Town")]
         public int TownId { get; set; }
 
         public string TownName { get; set; }
 
+        [Required]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
 
         public string CountryName { get; set; }
