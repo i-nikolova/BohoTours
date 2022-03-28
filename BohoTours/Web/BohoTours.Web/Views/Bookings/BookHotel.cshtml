@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BohoTours.Web.ViewModels.Hotels.HotelRoomViewModel>
+
+
+
+<article class="article">
+    <h4>Prices</h4>
+    @foreach (var room in Model.Where(x => !x.IsDeleted))
+    {
+        <h5 class="text-center mt-5 ">@room.RoomType</h5>
+        <p class="text-center text-muted">Max people: @room.MaxCapacity</p>
+        <table class="table table-bordered table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Single person</th>
+                    <th scope="col">Price per room</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var roomPrice in room.HotelRoomPrices.Where(x => !x.IsDeleted))
+                {
+                    <tr>
+                        <td>@roomPrice.Date.ToShortDateString()</td>
+                        <td><a asp-route-id="@roomPrice.Id" asp-route-price="@roomPrice.PricePerPerson" asp-action="AddBooking">@roomPrice.PricePerPerson.ToString("N2")</a></td>
+                        <td><a asp-route-id="@roomPrice.Id" asp-route-price="@roomPrice.PricePerNight" asp-action="AddBooking">@roomPrice.PricePerNight</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</article>
