@@ -12,11 +12,13 @@
     using BohoTours.Services.Data.Vacations;
     using BohoTours.Web.ViewModels.Continenst;
     using BohoTours.Web.ViewModels.Countries;
+    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Towns;
     using BohoTours.Web.ViewModels.Transports;
     using BohoTours.Web.ViewModels.Vacations;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Routing;
 
     public class VacationsController : Controller
     {
@@ -186,9 +188,23 @@
             return this.Redirect($"/Vacations/Details/{vacationId}");
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, FeedbackViewModel feedback)
         {
+            if (feedback.ModelId != 0)
+            {
+                id = feedback.ModelId;
+            }
+
             var vacation = this.vacationsService.GetById<SingleVacationViewModel>(id);
+
+            if (feedback == null)
+            {
+                vacation.Feedback = new FeedbackViewModel();
+            }
+            else
+            {
+                vacation.Feedback = feedback;
+            }
 
             this.ViewData["Title"] = vacation.Name;
 
@@ -292,6 +308,23 @@
             await this.vacationsService.Delete(id);
 
             return this.Redirect($"/Vacations/All");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LeaveFeedback(FeedbackViewModel feedback)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction($"Details", new RouteValueDictionary(feedback));
+            }
+
+            await this.vacationsService.AddFeedback(feedback);
+            return this.RedirectToAction($"Details", new { id = feedback.ModelId });
+        }
+
+        public IActionResult Reviews(int id)
+        {
+            return this.View(this.vacationsService.GetReviews<VacationRatingsViewModel>(id));
         }
     }
 }

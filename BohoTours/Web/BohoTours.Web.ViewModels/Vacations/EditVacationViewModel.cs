@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Text;
+
     using AutoMapper;
     using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
@@ -38,7 +39,7 @@
         public int TransportId { get; set; }
 
         [Required]
-        [Display(Name="Cover image")]
+        [Display(Name = "Cover image")]
         public string ImagePath { get; set; }
 
         public int ContinentId { get; set; }
@@ -47,6 +48,7 @@
         public byte Duration { get; set; }
 
         public string CountryName { get; set; }
+
         [Required]
         [Display(Name = "Town")]
         public string TownName { get; set; }

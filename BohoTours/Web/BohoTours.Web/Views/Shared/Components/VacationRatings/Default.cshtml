@@ -1,0 +1,59 @@
+﻿@model BohoTours.Web.ViewModels.Vacations.VacationRatingsViewModel
+<div class="widget widget-post">
+    <div class="widget-title">
+        <h3>Reviews</h3>
+    </div>
+    <div class="widget-body">
+        <div class="d-flex justify-content-center">
+            <div class="text-center">
+                <div class="ratings">
+                    <span class="product-rating">@Model.Rating.ToString("N1")</span><span>/5</span>
+                    <div class="stars">
+                        @if (Model.Rating >= 1)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rating >= 2)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rating >= 3)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rating >= 4)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                        @if (Model.Rating >= 5)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-star"></i>
+                        }
+                    </div>
+                    <div class="rating-text"> <span>@Model.RatingsCount ratings & reviews</span> </div>
+                    <div> <a class="btn btn-primary mt-2" asp-action="Reviews" asp-route-id="@Model.Id">See reviews</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

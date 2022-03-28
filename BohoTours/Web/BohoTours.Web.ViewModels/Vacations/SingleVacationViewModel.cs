@@ -8,6 +8,7 @@
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using BohoTours.Web.ViewModels.Feedbacks;
 
     public class SingleVacationViewModel : IMapFrom<Vacation>, IHaveCustomMappings
     {
@@ -31,6 +32,10 @@
 
         public byte Duration { get; set; }
 
+        public bool HasReviews { get; set; }
+
+        public FeedbackViewModel Feedback { get; set; }
+
         public ICollection<VacationPriceViewModel> VacationPrices { get; set; }
 
         public ICollection<string> Images { get; set; } = new List<string>();
@@ -39,6 +44,7 @@
         {
             configuration.CreateMap<Vacation, SingleVacationViewModel>()
                 .ForMember(x => x.TownsVisited, opt => opt.MapFrom(x => string.Join(", ", x.TownsVisited.Select(t => t.Name))))
+                .ForMember(m => m.HasReviews, opt => opt.MapFrom(x => x.VacationsRatings.Count > 0))
                 .ForMember(x => x.VacationMinPrice, opt => opt.MapFrom(x => x.VacationPrices.Select(x => x.Price).Min()))
                 .ForMember(m => m.Images, opt => opt.MapFrom(hi => hi.VacationImages.Where(x => !x.IsDeleted).Select(x => x.ImageUrl)))
                 .ForMember(x => x.TrasportType, opt => opt.MapFrom(x => x.Transport.TransportType));

@@ -13,6 +13,7 @@
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using CloudinaryDotNet;
+    using Microsoft.EntityFrameworkCore;
 
     public class HotelsService : IHotelsService
     {
@@ -230,7 +231,7 @@
 
         public async Task AddFeedback(FeedbackViewModel feedback)
         {
-            var hotel = this.hotelsRepository.All().FirstOrDefault(x => x.Id == feedback.HotelId);
+            var hotel = this.hotelsRepository.All().FirstOrDefault(x => x.Id == feedback.ModelId);
             hotel.HotelRatings.Add(new HotelRatings()
             {
                 Name = feedback.Name,
@@ -241,6 +242,11 @@
 
             this.hotelsRepository.Update(hotel);
             await this.hotelsRepository.SaveChangesAsync();
+        }
+
+        public T GetReviews<T>(int hotelId)
+        {
+            return this.hotelsRepository.AllAsNoTracking().Where(x => x.Id == hotelId && !x.IsDeleted).To<T>().FirstOrDefault();
         }
     }
 }

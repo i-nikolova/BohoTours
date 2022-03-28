@@ -10,6 +10,7 @@
     using BohoTours.Data.Models;
     using BohoTours.Services.Data.CloudinaryHelper;
     using BohoTours.Services.Mapping;
+    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Vacations;
     using CloudinaryDotNet;
     using Microsoft.EntityFrameworkCore;
@@ -180,7 +181,6 @@
 
             this.vacationsRepostory.Update(vacation);
             await this.vacationsRepostory.SaveChangesAsync();
-
         }
 
         public IEnumerable<T> GetAll<T>()
@@ -211,6 +211,26 @@
             }
 
             return recommendedVacations;
+        }
+
+        public async Task AddFeedback(FeedbackViewModel feedback)
+        {
+            var vacation = this.vacationsRepostory.All().FirstOrDefault(x => x.Id == feedback.ModelId);
+            vacation.VacationsRatings.Add(new VacationRatings()
+            {
+                Name = feedback.Name,
+                Email = feedback.Email,
+                Message = feedback.Message,
+                Rating = feedback.Rating,
+            });
+
+            this.vacationsRepostory.Update(vacation);
+            await this.vacationsRepostory.SaveChangesAsync();
+        }
+
+        public T GetReviews<T>(int hotelId)
+        {
+            return this.vacationsRepostory.AllAsNoTracking().Where(x => x.Id == hotelId && !x.IsDeleted).To<T>().FirstOrDefault();
         }
     }
 }

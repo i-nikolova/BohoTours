@@ -5,6 +5,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Vacations;
 
     public interface IVacationsService
@@ -22,5 +23,9 @@
         Task Edit(EditVacationViewModel vacation);
 
         Task Delete(int vacationId);
+
+        Task AddFeedback(FeedbackViewModel feedback);
+
+        T GetReviews<T>(int hotelId);
     }
 }

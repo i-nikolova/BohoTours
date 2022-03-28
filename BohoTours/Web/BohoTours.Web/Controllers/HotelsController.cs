@@ -1,5 +1,7 @@
 ﻿namespace BohoTours.Web.Controllers
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -91,9 +93,9 @@
 
         public IActionResult Details(int id, FeedbackViewModel feedback)
         {
-            if (feedback.HotelId != 0)
+            if (feedback.ModelId != 0)
             {
-                id = feedback.HotelId;
+                id = feedback.ModelId;
             }
 
             var hotel = this.hotelsService.GetById<SingleHotelViewModel>(id);
@@ -285,7 +287,12 @@
             }
 
             await this.hotelsService.AddFeedback(feedback);
-            return this.RedirectToAction($"Details", new { id=feedback.HotelId});
+            return this.RedirectToAction($"Details", new { id = feedback.ModelId });
+        }
+
+        public IActionResult Reviews(int id)
+        {
+            return this.View(this.hotelsService.GetReviews<HotelRatingsViewModel>(id));
         }
     }
 }

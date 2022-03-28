@@ -4,7 +4,7 @@
 
     public class FeedbackViewModel
     {
-        public int HotelId { get; set; }
+        public int ModelId { get; set; }
 
         [Range(1, 5)]
         public int Rating { get; set; }

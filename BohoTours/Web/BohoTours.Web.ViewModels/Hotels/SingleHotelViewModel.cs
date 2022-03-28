@@ -28,6 +28,8 @@
 
         public string CountryName { get; set; }
 
+        public bool HasReviews { get; set; }
+
         public FeedbackViewModel Feedback { get; set; }
 
         public ICollection<HotelRoomViewModel> HotelRooms { get; set; } = new List<HotelRoomViewModel>();
@@ -40,6 +42,7 @@
         {
             configuration.CreateMap<Hotel, SingleHotelViewModel>()
                 .ForMember(m => m.CountryName, opt => opt.MapFrom(x => x.Town.Country.Name))
+                .ForMember(m => m.HasReviews, opt => opt.MapFrom(x => x.HotelRatings.Count > 0))
                 .ForMember(m => m.Images, opt => opt.MapFrom(hi => hi.HotelImages.Where(x => !x.IsDeleted).Select(x => x.ImageUrl)))
                 .ForMember(
                     m => m.RoomMinPrice,

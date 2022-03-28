@@ -1,0 +1,100 @@
+﻿@model BohoTours.Web.ViewModels.Vacations.VacationRatingsViewModel
+
+<div class="container-fluid px-1 py-5 mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-center mb-5">
+            <div class="text-center">
+                <div class="ratings">
+                    <span class="product-rating">@Model.Rating.ToString("N1")</span><span>/5</span>
+                    <div class="stars">
+                        @if (Model.Rating >= 1)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i> }
+                        else
+                        {
+                            <i class="fa fa-star"></i>}
+                        @if (Model.Rating >= 2)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i> }
+                        else
+                        {
+                            <i class="fa fa-star"></i>}
+                        @if (Model.Rating >= 3)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i> }
+                        else
+                        {
+                            <i class="fa fa-star"></i>}
+                        @if (Model.Rating >= 4)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i> }
+                        else
+                        {
+                            <i class="fa fa-star"></i>}
+                        @if (Model.Rating >= 5)
+                        {
+                            <i style="color:#28a745" class="fa fa-star"></i> }
+                        else
+                        {
+                            <i class="fa fa-star"></i>}
+                    </div>
+                    <div class="rating-text"> <span>@Model.RatingsCount ratings & reviews</span> </div>
+                    <div> <a class="btn btn-primary mt-2 mb-2" asp-action="Details" asp-route-id="@Model.Id">Back to vacation</a></div>
+                </div>
+            </div>
+            @foreach (var item in Model.HotelRatingsReviews)
+            {
+                <div class="cardReview">
+                    <div class="row d-flex">
+                        <div class=""> <img class="profile-pic" src="https://www.pepperhub.in/wp-content/uploads/2020/11/user-male.png"> </div>
+                        <div class="d-flex flex-column">
+                            <h3 class="mt-2 mb-0">@item.Name</h3>
+                            <div>
+                                <p class="text-left">
+                                    <span class="text-muted mr-2">@item.Rating.ToString("N1")</span>
+                                    @if (item.Rating >= 1)
+                                    {
+                                        <i style="color:#28a745" class="fa fa-star"></i> }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>}
+                                    @if (item.Rating >= 2)
+                                    {
+                                        <i style="color:#28a745" class="fa fa-star"></i> }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>}
+                                    @if (item.Rating >= 3)
+                                    {
+                                        <i style="color:#28a745" class="fa fa-star"></i> }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>}
+                                    @if (item.Rating >= 4)
+                                    {
+                                        <i style="color:#28a745" class="fa fa-star"></i> }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>}
+                                    @if (item.Rating >= 5)
+                                    {
+                                        <i style="color:#28a745" class="fa fa-star"></i> }
+                                    else
+                                    {
+                                        <i class="fa fa-star"></i>}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="ml-auto">
+                            <p class="text-muted pt-5 pt-sm-3">@item.Email</p>
+                        </div>
+                    </div>
+                    <div class="row text-left">
+                        <h4 class="blue-text mt-3">"@item.Message"</h4>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
