@@ -1,0 +1,179 @@
+﻿@model BohoTours.Web.ViewModels.Vacations.VacationsListViewModel
+
+@{
+    ViewData["Title"] = "Vacations";
+}
+
+<link rel="stylesheet" href="~/css/templatemo-style.css" />
+<link rel="stylesheet" href="~/slick/slick.css" />
+<link rel="stylesheet" href="~/slick/slick-theme.css" />
+
+<div class="text-center m-2">
+    <h1 class="cust-font">Vacations</h1>
+</div>
+
+<hr />
+
+<div class="container">
+    <div class="row">
+    </div>
+    <form method="get">
+        <div class="row">
+            <div class="col-lg-2 col-md-3 mt-3">
+                <label asp-for="Country"></label>
+                <select class="form-control" asp-for="Country">
+                    <option value="0">All</option>
+                    @foreach (var country in Model.Countries)
+                    {
+                        if (int.Parse(country.Value) == Model.Country)
+                        {
+                            <option selected="selected" value="@country.Value">@country.Text</option>
+                        }
+                        <option value="@country.Value">@country.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-3 mt-3">
+                <label asp-for="Towns"></label>
+                <select class="form-control" asp-for="Towns" multiple data-live-search="true" asp-items="@Model.TownsList">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-3 mt-3">
+                <label asp-for="SearchTerm"></label>
+                <input type="text" asp-for="SearchTerm" class="form-control" placeholder="Hotel name" value="@Model.SearchTerm">
+            </div>
+            <div class="col-lg-2 col-md-3 mt-3">
+                <label asp-for="Sorting"></label>
+                <select asp-for="Sorting" class="form-control">
+                    <option value="0">Date added</option>
+                    <option value="1">Price (desc)</option>
+                    <option value="2">Price (asc)</option>
+                    <option value="3">Name</option>
+                    <option value="4">Country</option>
+                </select>
+            </div>
+            <div class="col-lg-2 col-md-2 mt-5">
+                <button type="submit" asp-route-id="1" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+    <div class="row">
+        @foreach (var item in @Model.Vacations)
+        {
+            <div class="card col-12 mt-5 mr-2">
+                <img class="card-img-top" src="@item.ImagePath" alt="@item.Name">
+                <div class="card-body">
+                    <h4 class="card-title">@item.Name</h4>
+                    <small class="text-muted cat">
+                        <i class="far fa-clock text-info"></i> @item.Duration days
+                        @if (item.TrasportType == "Plane")
+                        {
+                            <i class="fas fa-plane text-info"></i> @item.TrasportType
+                        }
+                        else
+                        {
+                            <i class="fas fa-bus text-info"></i> @item.TrasportType
+                        }
+                        <i class="far fa-map text-info"></i> @item.CountryName
+                    </small>
+                    <p class="card-text">@item.Description</p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-block">Read More</a>
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
+                    <div class="views">
+                        Prices start from <spam class="text-info">$@item.VacationMinPrice</spam>
+                    </div>
+                    <div class="stats">
+                        @item.TownsVisited
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if (!Model.Vacations.Any())
+{
+    <h3 class="text-center">No hotels found!</h3>
+}
+else
+{
+    <nav aria-label="...">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @if (!Model.HasPrevious){ <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.PreviousPageNumber" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Towns">Previous</a>
+            </li>
+            @for (int i = @Model.PageNumber - 2; i < @Model.PageNumber; i++)
+            {
+                @if (i > 0)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="All" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Towns" asp-route-id="@i">@i</a></li>
+                }
+            }
+            <li class="page-item active">
+                <a class="page-link">@Model.PageNumber <span class="sr-only">(current)</span></a>
+            </li>
+            @for (int i = @Model.PageNumber + 1; i < @Model.PageNumber + 3; i++)
+            {
+                @if (i <= @Model.PagesCount)
+                {
+                    <li class="page-item"><a class="page-link" asp-action="All" asp-route-id="@i" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Towns">@i</a></li>
+                }
+            }
+            <li class="page-item @if (!Model.HasNext){ <text>disabled</text>}">
+                <a class="page-link" asp-action="All" asp-route-id="@Model.NextPageNumber" asp-route-searchTerm="@Model.SearchTerm" asp-route-sorting="@Model.Sorting" asp-route-town="@Model.Towns">Next</a>
+            </li>
+        </ul>
+    </nav>
+}
+
+@section Scripts {
+
+
+    <script>
+        $(document).ready(function () {
+            $('#Towns').selectpicker();
+            if ($('#Country').val == 0) {
+                $('#Towns').prop('disabled', true);
+                $('#Towns').selectpicker('refresh');
+            }
+            else {
+                var model = @Html.Raw(Json.Serialize(Model))
+                $('#Towns').val = model.selectedTowns;
+            }
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        $('#Country').change(function () {
+
+            $('#Towns').selectpicker('refresh');
+            $('#Towns option').remove();
+            if ($('#Country').val() > 0) {
+                $('#Towns').prop('disabled', false);
+                $.getJSON('/api/Towns',
+                    { countryId: $('#Country').val() },
+                    function (data) {
+                        $.each(data,
+                            function () {
+                                $('#Towns').append('<option value=' +
+                                    this.id +
+                                    '>' +
+                                    this.name +
+                                    '</option>');
+                            });
+                        $('#Towns').selectpicker('refresh');
+                    });
+            }
+            else {
+                $('#Towns').prop('disabled', true);
+                $('#Towns').selectpicker('refresh');
+            }
+        });
+    </script>
+}
+
