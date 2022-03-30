@@ -15,6 +15,8 @@
     {
         public int Id { get; set; }
 
+        public int HotelId { get; set; }
+
         [Required]
         [StringLength(DataConstants.RoomTypeMaxLength, MinimumLength = DataConstants.RoomTypeMinLength)]
         public string RoomType { get; set; }

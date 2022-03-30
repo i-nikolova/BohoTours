@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BohoTours.Web.ViewModels.Bookings.HotelBookingViewModel>
+
+<article class="article">
+    <h4>Bookings</h4>
+    <table class="table table-bordered table-hover">
+        <thead class="text-center">
+            <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Hotel Name</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.OrderByDescending(x => x.Id))
+            {
+            <tr>
+                <td>@booking.Id</td>
+                <td>@booking.HotelName</td>
+                <td>@booking.RoomType</td>
+                <td>@booking.FirstName @booking.LastName</td>
+                <td>@booking.Email</td>
+                <td>@booking.Duration nights</td>
+                <td>@booking.StartDate.ToShortDateString()</td>
+                <td>@booking.EndDate.ToShortDateString()</td>
+                <td>@booking.Price</td>
+                <td>@booking.BookingStatus.ToString()</td>
+                @if (booking.BookingStatus == BohoTours.Data.Models.BookingStatus.Pending)
+                {
+                    <td><a class="btn btn-primary" asp-controller="Bookings" asp-action="ConfirmBooking" asp-route-type="1" asp-route-id="@booking.Id">Confirm</a></td>
+
+                }
+                @if (booking.BookingStatus == BohoTours.Data.Models.BookingStatus.Approved)
+                {
+                    <td><a class="btn btn-danger" asp-controller="Bookings" asp-action="Delete" asp-route-type="1" asp-route-id="@booking.Id">Delete</a></td>
+
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
+</article>

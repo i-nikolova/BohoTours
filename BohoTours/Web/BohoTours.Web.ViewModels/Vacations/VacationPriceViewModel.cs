@@ -13,6 +13,8 @@
     {
         public int Id { get; set; }
 
+        public int VacationId { get; set; }
+
         [Required]
         public DateTime Date { get; set; }
 

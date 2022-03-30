@@ -16,6 +16,8 @@
 
         IEnumerable<T> GetRecommended<T>();
 
+        IEnumerable<T> GetRecommendedByContinent<T>(string continetnCode);
+
         int GetCount();
 
         T GetById<T>(int id);
@@ -29,5 +31,7 @@
         Task AddFeedback(FeedbackViewModel feedback);
 
         T GetReviews<T>(int hotelId);
+
+        (string HotelName, string RoomType) GetRoomInfo(int id);
     }
 }

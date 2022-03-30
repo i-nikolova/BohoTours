@@ -15,6 +15,7 @@
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using BohoTours.Web.ViewModels.Towns;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Routing;
@@ -114,6 +115,7 @@
             return this.View(hotel);
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateHotelViewModel()
@@ -134,6 +136,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(CreateHotelViewModel hotel)
         {
@@ -185,6 +188,7 @@
             return this.Redirect($"/Hotels/Details/{hotelId}");
         }
 
+        [Authorize]
         public IActionResult Edit(int id)
         {
             var hotel = this.hotelsService.GetById<EditHotelViewModel>(id);
@@ -215,6 +219,7 @@
             return this.View(hotel);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(EditHotelViewModel hotel)
         {
@@ -271,6 +276,7 @@
             return this.Redirect($"/Hotels/Details/{hotel.Id}");
         }
 
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             await this.hotelsService.Delete(id);
@@ -278,6 +284,7 @@
             return this.Redirect($"/Hotels/All");
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> LeaveFeedback(FeedbackViewModel feedback)
         {

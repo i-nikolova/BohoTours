@@ -17,6 +17,6 @@
 
         public decimal Price { get; set; }
 
-        public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
+        public ICollection<VacationBooking> Bookings { get; set; } = new HashSet<VacationBooking>();
     }
 }

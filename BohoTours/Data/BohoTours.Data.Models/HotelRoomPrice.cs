@@ -16,6 +16,7 @@
         public DateTime Date { get; set; }
 
         public decimal PricePerNight { get; set; }
-        public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
+
+        public ICollection<HotelBooking> Bookings { get; set; } = new HashSet<HotelBooking>();
     }
 }

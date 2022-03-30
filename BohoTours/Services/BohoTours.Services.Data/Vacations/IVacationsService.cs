@@ -14,6 +14,8 @@
 
         IEnumerable<T> GetRecommended<T>();
 
+        IEnumerable<T> GetRecommendedByContinent<T>(string continetnCode);
+
         int GetCount();
 
         T GetById<T>(int id);

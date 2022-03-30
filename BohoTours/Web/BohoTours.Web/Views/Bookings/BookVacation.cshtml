@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BohoTours.Web.ViewModels.Vacations.VacationPriceViewModel>
+
+
+
+<article class="article">
+    <h4>Prices</h4>
+        <table class="table table-bordered table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col">Price per person</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var price in Model.Where(x => !x.IsDeleted).OrderBy(x => x.Date).Where(x => x.Date >= DateTime.UtcNow))
+                {
+                    <tr>
+                        <td>@price.Date.ToShortDateString()</td>
+                        <td><a asp-route-modelId="@price.VacationId" asp-route-modelPriceId="@price.Id" asp-route-startDate="@price.Date" asp-route-price="@price.Price" asp-action="AddVacationBooking" asp-route-type="1">@price.Price.ToString("N2")</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</article>

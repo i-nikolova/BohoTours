@@ -248,5 +248,36 @@
         {
             return this.hotelsRepository.AllAsNoTracking().Where(x => x.Id == hotelId && !x.IsDeleted).To<T>().FirstOrDefault();
         }
+
+        public (string HotelName, string RoomType) GetRoomInfo(int id)
+        {
+            var room = this.hotelRoomsPricesRepository.AllAsNoTracking().Where(x => x.Id == id).Select(x => new
+            {
+                RoomType = x.Room.RoomType,
+                HotelName = x.Room.Hotel.Name,
+            }).FirstOrDefault();
+
+            return (room.HotelName, room.RoomType);
+        }
+
+        public IEnumerable<T> GetRecommendedByContinent<T>(string continetnCode)
+        {
+            var random = new Random();
+            var list = this.hotelsRepository.AllAsNoTracking().Where(x => x.Town.Country.Continent.ContinentCode == continetnCode).To<T>().ToArray();
+            var recommendedVacations = new List<T>();
+
+            if (list.Count() > 0)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    int index = random.Next(list.Count());
+                    recommendedVacations.Add(list[index]);
+                }
+            }
+
+
+
+            return recommendedVacations;
+        }
     }
 }

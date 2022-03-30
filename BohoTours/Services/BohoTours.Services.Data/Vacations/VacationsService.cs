@@ -232,5 +232,24 @@
         {
             return this.vacationsRepostory.AllAsNoTracking().Where(x => x.Id == hotelId && !x.IsDeleted).To<T>().FirstOrDefault();
         }
+
+        public IEnumerable<T> GetRecommendedByContinent<T>(string continetnCode)
+        {
+            var random = new Random();
+            var list = this.vacationsRepostory.AllAsNoTracking().Where(x => x.Country.Continent.ContinentCode == continetnCode).To<T>().ToArray();
+            var recommendedVacations = new List<T>();
+
+
+            if (list.Count() > 0)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    int index = random.Next(list.Count());
+                    recommendedVacations.Add(list[index]);
+                }
+            }
+
+            return recommendedVacations;
+        }
     }
 }

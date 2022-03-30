@@ -6,35 +6,38 @@
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Text;
 
+    using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Common.Models;
 
-    public class Booking : BaseDeletableModel<int>
+    public class VacationBooking : BaseDeletableModel<int>
     {
         [Required]
+        [MaxLength(DataConstants.NameMaxLength)]
         public string FirstName { get; set; }
 
         [Required]
+        [MaxLength(DataConstants.NameMaxLength)]
         public string LastName { get; set; }
+
+        [Required]
+        [MaxLength(DataConstants.EmailMaxLength)]
+        public string Email { get; set; }
 
         [Range(1, double.MaxValue)]
         public decimal Price { get; set; }
 
         [Range(1, int.MaxValue)]
-        public int Duration { get; set; }
+        public int People { get; set; }
 
         public DateTime StartDate { get; set; }
 
-        public int HotelRoomPriceId { get; set; }
-
-        [ForeignKey(nameof(HotelRoomPriceId))]
-        public HotelRoomPrice Hotel { get; set; }
+        public DateTime EndDate { get; set; }
 
         public int VacationPriceId { get; set; }
 
         [ForeignKey(nameof(VacationPriceId))]
-        public VacationPrice Vacation { get; set; }
+        public VacationPrice VacationPrice { get; set; }
 
         public BookingStatus BookingStatus { get; set; }
-
     }
 }

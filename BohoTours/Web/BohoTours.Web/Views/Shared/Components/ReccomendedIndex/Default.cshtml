@@ -1,0 +1,30 @@
+﻿@model BohoTours.Web.ViewModels.Home.ReccomendedIndexViewModel
+
+@foreach (var item in Model.Hotels)
+{
+<div class="tm-recommended-place">
+    <img src="@item.ImagePath" alt="Image" class="img-fluid tm-recommended-img">
+    <div class="tm-recommended-description-box">
+        <h3 class="tm-recommended-title">@item.Name</h3>
+        <p class="tm-text-highlight">@item.CountryName, @item.TownName</p>
+    </div>
+    <a asp-controller="Hotels" asp-action="Details" asp-route-id="@item.Id" class="tm-recommended-price-box">
+        <p class="tm-recommended-price">@item.RoomMinPrice</p>
+        <p class="tm-recommended-price-link">Continue Reading</p>
+    </a>
+</div>}
+
+@foreach (var item in Model.Vacations)
+{
+<div class="tm-recommended-place">
+    <img src="@item.ImagePath" alt="Image" class="img-fluid tm-recommended-img">
+    <div class="tm-recommended-description-box">
+        <h3 class="tm-recommended-title">@item.Name</h3>
+        <p class="tm-text-highlight">@item.CountryName</p>
+        <p class="tm-text-grey">@item.TownsVisited</p>
+    </div>
+    <a asp-controller="Vacations" asp-action="Details" asp-route-id="@item.Id" class="tm-recommended-price-box">
+        <p class="tm-recommended-price">@item.VacationMinPrice</p>
+        <p class="tm-recommended-price-link">Continue Reading</p>
+    </a>
+</div>}

@@ -26,57 +26,54 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <li is-active-route asp-controller="Vacations" asp-action="All" class="nav-item">
                         <a class="nav-link" asp-controller="Vacations" asp-action="All" asp-route-id="1">Vacations <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li is-active-route class="nav-item">
                         <a class="nav-link" asp-controller="Hotels" asp-action="All" asp-route-id="1">Hotels</a>
                     </li>
-                    <li class="nav-item">
+                    <li is-active-route class="nav-item">
                         <a class="nav-link" asp-controller="Hotels" asp-action="Create">Add Hotel</a>
+                    </li>
+                    <li is-active-route class="nav-item">
                         <a class="nav-link" asp-controller="Vacations" asp-action="Create">Add Vacation</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Destinations
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Europe</a>
-                            <a class="dropdown-item" href="#">Asia</a>
-                            <a class="dropdown-item" href="#">South America</a>
-                            <a class="dropdown-item" href="#">North America</a>
-                        </div>
+                    <li is-active-route class="nav-item">
+                        <a class="nav-link" asp-controller="Bookings" asp-action="AllHotelBookings">Hotel Bookings</a>
+                    </li>
+                    <li is-active-route class="nav-item">
+                        <a class="nav-link" asp-controller="Bookings" asp-action="AllVacationBookings">Vacation Bookings</a>
                     </li>
                 </ul>
                 <ul class="nav justify-content-end ">
                     @if (!this.User.Identity.IsAuthenticated)
                     {
 
-                        <li>
-                            <a data-toggle="dropdown" class="nav-link mt-1" href="#"><i class="fa fa-user"> Login</i></a>
-                            <ul class="dropdown-menu form-wrapper">
-                                <li>
-                                    <form asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Home/Index" method="post">
-                                        <p class="hint-text">Sign in with your social media account</p>
-                                        <div class="form-group social-btn clearfix">
-                                            <a href="#" class="btn btn-primary pull-left"><i class="fa fa-facebook"></i> Facebook</a>
-                                            <a href="#" class="btn btn-info pull-right"><i class="fa fa-twitter"></i> Twitter</a>
-                                        </div>
-                                        <div class="or-seperator"><b>or</b></div>
-                                        <div class="form-group">
-                                            <input type="email" name="email" class="form-control" placeholder="Username" required="required">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" name="password" class="form-control" placeholder="Password" required="required">
-                                        </div>
-                                        <input type="submit" class="btn btn-primary btn-block" value="Login">
-                                        <div class="form-footer">
-                                            <a href="#">Forgot Your password?</a>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+        <li>
+            <a data-toggle="dropdown" class="nav-link mt-1" href="#"><i class="fa fa-user"> Login</i></a>
+            <ul class="dropdown-menu form-wrapper">
+                <li>
+                    <form asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Home/Index" method="post">
+                        <p class="hint-text">Sign in with your social media account</p>
+                        <div class="form-group social-btn clearfix">
+                            <a href="#" class="btn btn-primary pull-left"><i class="fa fa-facebook"></i> Facebook</a>
+                            <a href="#" class="btn btn-info pull-right"><i class="fa fa-twitter"></i> Twitter</a>
+                        </div>
+                        <div class="or-seperator"><b>or</b></div>
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Username" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required="required">
+                        </div>
+                        <input type="submit" class="btn btn-primary btn-block" value="Login">
+                        <div class="form-footer">
+                            <a href="#">Forgot Your password?</a>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+        </li>
                         <li>
                             <a href="#" id="signIn" data-toggle="dropdown" class="btn btn-primary get-started-btn mt-1 mb-1"><i class="fa fa-id-card"> Sign up</i></a>
                             <ul class="dropdown-menu form-wrapper">
@@ -99,10 +96,9 @@
                                     </form>
                                 </li>
                             </ul>
-                        </li>
-                    }
-                    else
-                    {
+                        </li> }
+                                    else
+                                    {
                         <li class="nav-item dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle user-action"><img src="https://www.tutorialrepublic.com/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> @User.Identity.Name<b class="caret"></b></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -115,8 +111,7 @@
                                 <form id="logout" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
                                 </form>
                             </div>
-                        </li>
-                    }
+                        </li>}
                 </ul>
 
 
@@ -185,7 +180,6 @@
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.0.4/popper.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://kit.fontawesome.com/e3daaa3d52.js" crossorigin="anonymous"></script>

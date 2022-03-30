@@ -15,5 +15,8 @@
         public const int VacationNameMaxLength = 50;
         public const int RoomTypeMaxLength = 50;
         public const int RoomTypeMinLength = 3;
+        public const int NameMaxLength = 100;
+        public const int NameMinLength = 3;
+        public const int EmailMaxLength = 100;
     }
 }

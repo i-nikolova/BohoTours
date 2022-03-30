@@ -17,12 +17,12 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var roomPrice in room.HotelRoomPrices.Where(x => !x.IsDeleted))
+                @foreach (var roomPrice in room.HotelRoomPrices.Where(x => !x.IsDeleted).OrderBy(x=>x.Date).Where(x=>x.Date>=DateTime.UtcNow))
                 {
                     <tr>
                         <td>@roomPrice.Date.ToShortDateString()</td>
-                        <td><a asp-route-id="@roomPrice.Id" asp-route-price="@roomPrice.PricePerPerson" asp-action="AddBooking">@roomPrice.PricePerPerson.ToString("N2")</a></td>
-                        <td><a asp-route-id="@roomPrice.Id" asp-route-price="@roomPrice.PricePerNight" asp-action="AddBooking">@roomPrice.PricePerNight</a></td>
+                        <td><a asp-route-modelId="@room.HotelId" asp-route-modelPriceId="@roomPrice.Id" asp-route-startDate="@roomPrice.Date" asp-route-price="@roomPrice.PricePerPerson" asp-action="AddHotelBooking" asp-route-type="1">@roomPrice.PricePerPerson.ToString("N2")</a></td>
+                        <td><a asp-route-modelId="@room.HotelId" asp-route-modelPriceId="@roomPrice.Id" asp-route-startDate="@roomPrice.Date" asp-route-price="@roomPrice.PricePerNight" asp-action="AddHotelBooking" asp-route-type="1">@roomPrice.PricePerNight</a></td>
                     </tr>
                 }
             </tbody>

@@ -1,0 +1,93 @@
+﻿@model BohoTours.Web.ViewModels.Bookings.CreateHotelBookingViewModel
+
+@{ ViewData["Title"] = "Add booking"; }
+
+<div class="text-center m-2">
+    <h1 class="cust-font">Add new booking</h1>
+</div>
+<hr />
+
+<form method="post" id="form" name="form">
+
+    <input asp-for="EntityPriceId" class="form-control" hidden />
+    <input asp-for="EntityId" class="form-control" hidden />
+
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="HotelName">Hotel Name</label>
+            <input asp-for="HotelName" class="form-control" value="@Model.HotelName" readonly />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="RoomType">Room Type</label>
+            <input asp-for="RoomType" class="form-control" value="@Model.RoomType" readonly />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label class="mb-2 mr-sm-2" asp-for="Duration">Nights</label>
+            <input asp-for="Duration" class="form-control" />
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2 mr-sm-2" for="StartDate">Start Date</label>
+            <input id="startDate" type="date" name="StartDate" class="form-control" value="@Model.StartDate.ToString("yyyy-MM-dd")" readonly />
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2 mr-sm-2" for="EndDate">End Date</label>
+            <input id="endDate" type="date" name="EndDate" class="form-control" readonly />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label class="mb-2 mr-sm-2" asp-for="Price">Price per night</label>
+            <input type="text" asp-for="Price" class="form-control" readonly />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="mb-2 mr-sm-2" for="TotalPrice">Total</label>
+            <input type="text" id="total" name="TotalPrice" class="form-control" readonly />
+        </div>
+    </div>
+
+    <hr />
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary btn-lg mr-3"> <i class="fa fa-floppy-o"></i> Add booking</button>
+        <a class="btn btn-secondary btn-lg" asp-controller="Bookings" asp-action="BookHotel" asp-route-id="@Model.EntityId"><i class="fa fa-arrow-alt-circle-left"></i> Choose other price</a>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    <script>
+        $('#Duration').change(function () {
+            var total = $("#Duration").val() * $("#Price").val();
+            $('#total').attr('value', total.toFixed(2));
+
+            var from = $("#startDate").val().split("-")
+            var startDate = new Date(from[0], from[1] - 1, from[2])
+            var days = parseInt($("#Duration").val()) + 1;
+            var endDate = new Date(startDate.setDate(startDate.getDate() + days));
+
+            $('#endDate').attr('value', endDate.toISOString("yyyy-MM-dd").substring(0, 10));
+
+        })
+    </script>
+}
