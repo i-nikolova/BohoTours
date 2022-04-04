@@ -75,12 +75,12 @@
             services.AddTransient<AngleSharp.Html.Parser.HtmlParser>();
             services.AddTransient<System.Net.Http.HttpClient>();
 
-            Account account = new Account(
+            Account account = new(
                 this.configuration["Cloudinary:AppName"],
                 this.configuration["Cloudinary:AppKey"],
                 this.configuration["Cloudinary:AppSecret"]);
 
-            Cloudinary cloudinary = new Cloudinary(account);
+            Cloudinary cloudinary = new(account);
 
             services.AddSingleton(cloudinary);
         }
@@ -121,7 +121,8 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("Areas", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapDefaultControllerRoute();
                         endpoints.MapRazorPages();
                     });
         }

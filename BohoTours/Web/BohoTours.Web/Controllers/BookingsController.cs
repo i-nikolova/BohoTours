@@ -28,48 +28,6 @@
         }
 
         [Authorize]
-        public IActionResult AllHotelBookings()
-        {
-            var bookings = this.bookingsService.GetAllHotelsBookings<HotelBookingViewModel>();
-
-            return this.View(bookings);
-        }
-
-        [Authorize]
-        public async Task<IActionResult> Delete(int id, int type)
-        {
-            await this.bookingsService.Delete(id, type);
-
-            if (type == 1)
-            {
-                return this.RedirectToAction("AllHotelBookings");
-            }
-
-            return this.RedirectToAction("AllVacationBookings");
-        }
-
-        [Authorize]
-        public async Task<IActionResult> ConfirmBooking(int id, int type)
-        {
-            await this.bookingsService.Confirm(id, type);
-
-            if (type == 1)
-            {
-                return this.RedirectToAction("AllHotelBookings");
-            }
-
-            return this.RedirectToAction("AllVacationBookings");
-        }
-
-        [Authorize]
-        public IActionResult AllVacationBookings()
-        {
-            var bookings = this.bookingsService.GetAllVacationBookings<VacationBookingViewModel>();
-
-            return this.View(bookings);
-        }
-
-        [Authorize]
         public IActionResult BookHotel(int id)
         {
             var hotel = this.hotelsService.GetById<SingleHotelViewModel>(id);
@@ -88,15 +46,15 @@
         [Authorize]
         public IActionResult AddHotelBooking(int modelId, int modelPriceId, int price, DateTime startDate)
         {
-            var roomInfo = this.hotelsService.GetRoomInfo(modelPriceId);
+            var (hotelName, roomType) = this.hotelsService.GetRoomInfo(modelPriceId);
 
             var booking = new CreateHotelBookingViewModel
             {
                 EntityPriceId = modelPriceId,
                 Price = price,
                 StartDate = startDate,
-                RoomType = roomInfo.RoomType,
-                HotelName = roomInfo.HotelName,
+                RoomType = roomType,
+                HotelName = hotelName,
                 EntityId = modelId,
             };
 

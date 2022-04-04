@@ -1,8 +1,6 @@
-﻿namespace BohoTours.Web.ViewModels.Bookings
+﻿namespace BohoTours.Web.Areas.Administration.Models.Bookings
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     using AutoMapper;
     using BohoTours.Data.Models;
