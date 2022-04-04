@@ -30,6 +30,7 @@
                               new SettingsSeeder(),
                               new ContinentsSeeder(),
                               new ScrapingSeeder(),
+                              new UserSeeder(),
                           };
 
             foreach (var seeder in seeders)
