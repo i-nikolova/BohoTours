@@ -38,7 +38,7 @@
                         }
                         @if (booking.BookingStatus == BohoTours.Data.Models.BookingStatus.Approved)
                         {
-                            <td><a class="btn btn-danger" asp-controller="Bookings" asp-action="DeleteBooking" asp-route-id="@booking.Id" asp-route-type="2">Delete</a></td>
+                            <td><a class="btn btn-danger" asp-controller="Bookings" asp-action="Delete" asp-route-id="@booking.Id" asp-route-type="2">Delete</a></td>
 
                         }
                     </tr>

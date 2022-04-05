@@ -27,23 +27,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li is-active-route asp-controller="Vacations" asp-action="All" class="nav-item">
-                        <a class="nav-link" asp-controller="Vacations" asp-action="All" asp-route-id="1">Vacations <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" asp-area="" asp-controller="Vacations" asp-action="All" asp-route-id="1">Vacations <span class="sr-only">(current)</span></a>
                     </li>
                     <li is-active-route class="nav-item">
-                        <a class="nav-link" asp-controller="Hotels" asp-action="All" asp-route-id="1">Hotels</a>
+                        <a class="nav-link" asp-area="" asp-controller="Hotels" asp-action="All" asp-route-id="1">Hotels</a>
                     </li>
-                    <li is-active-route class="nav-item">
-                        <a class="nav-link" asp-controller="Hotels" asp-action="Create">Add Hotel</a>
-                    </li>
-                    <li is-active-route class="nav-item">
-                        <a class="nav-link" asp-controller="Vacations" asp-action="Create">Add Vacation</a>
-                    </li>
-                    <li is-active-route class="nav-item">
-                        <a class="nav-link" asp-area="Administration" asp-controller="Bookings" asp-action="AllHotelBookings">Hotel Bookings</a>
-                    </li>
-                    <li is-active-route class="nav-item">
-                        <a class="nav-link" asp-area="Administration" asp-controller="Bookings" asp-action="AllVacationBookings">Vacation Bookings</a>
-                    </li>
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <li is-active-route class="nav-item">
+                            <a class="nav-link" asp-area="Administration"  asp-controller="Hotels" asp-action="Create">Add Hotel</a>
+                        </li>
+                        <li is-active-route class="nav-item">
+                            <a class="nav-link" asp-area="Administration"  asp-controller="Vacations" asp-action="Create">Add Vacation</a>
+                        </li>
+                        <li is-active-route class="nav-item">
+                            <a class="nav-link" asp-area="Administration" asp-controller="Bookings" asp-action="AllHotelBookings">Hotel Bookings</a>
+                        </li>
+                        <li is-active-route class="nav-item">
+                            <a class="nav-link" asp-area="Administration" asp-controller="Bookings" asp-action="AllVacationBookings">Vacation Bookings</a>
+                        </li>
+                    }
                 </ul>
                 <ul class="nav justify-content-end ">
                     @if (!this.User.Identity.IsAuthenticated)

@@ -21,8 +21,8 @@
                 {
                     <tr>
                         <td>@roomPrice.Date.ToShortDateString()</td>
-                        <td><a asp-route-modelId="@room.HotelId" asp-route-modelPriceId="@roomPrice.Id" asp-route-startDate="@roomPrice.Date" asp-route-price="@roomPrice.PricePerPerson" asp-action="AddHotelBooking" asp-route-type="1">@roomPrice.PricePerPerson.ToString("N2")</a></td>
-                        <td><a asp-route-modelId="@room.HotelId" asp-route-modelPriceId="@roomPrice.Id" asp-route-startDate="@roomPrice.Date" asp-route-price="@roomPrice.PricePerNight" asp-action="AddHotelBooking" asp-route-type="1">@roomPrice.PricePerNight</a></td>
+                        <td><a asp-route-modelId="@room.HotelId" asp-route-modelPriceId="@roomPrice.Id" asp-route-startDate="@roomPrice.Date.ToString("yyyy-MM-dd")" asp-route-price="@roomPrice.PricePerPerson.ToString("N2")" asp-action="AddHotelBooking" asp-route-type="1">@roomPrice.PricePerPerson.ToString("N2")</a></td>
+                        <td><a asp-route-modelId="@room.HotelId" asp-route-modelPriceId="@roomPrice.Id" asp-route-startDate="@roomPrice.Date.ToString("yyyy-MM-dd")" asp-route-price="@roomPrice.PricePerNight.ToString()" asp-action="AddHotelBooking" asp-route-type="1">@roomPrice.PricePerNight</a></td>
                     </tr>
                 }
             </tbody>

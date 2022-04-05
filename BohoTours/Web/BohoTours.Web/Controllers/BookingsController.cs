@@ -44,7 +44,7 @@
         }
 
         [Authorize]
-        public IActionResult AddHotelBooking(int modelId, int modelPriceId, int price, DateTime startDate)
+        public IActionResult AddHotelBooking([FromQuery]int modelId, int modelPriceId, int price, DateTime startDate)
         {
             var (hotelName, roomType) = this.hotelsService.GetRoomInfo(modelPriceId);
 

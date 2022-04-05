@@ -39,7 +39,6 @@
 
         public string CountryName { get; set; }
 
-        [Required]
         [Display(Name = "Town")]
         public string TownName { get; set; }
 
