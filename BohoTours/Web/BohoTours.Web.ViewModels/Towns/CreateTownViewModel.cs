@@ -1,14 +1,11 @@
 ﻿namespace BohoTours.Web.ViewModels.Towns
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
     using AutoMapper;
     using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class CreateTownViewModel : IMapFrom<Town>, IHaveCustomMappings
     {

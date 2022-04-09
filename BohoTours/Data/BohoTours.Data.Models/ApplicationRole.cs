@@ -1,11 +1,9 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 namespace BohoTours.Data.Models
 {
-    using System;
-
     using BohoTours.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using System;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

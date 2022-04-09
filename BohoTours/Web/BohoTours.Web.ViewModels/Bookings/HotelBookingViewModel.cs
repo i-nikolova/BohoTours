@@ -1,7 +1,7 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using BohoTours.Data.Models;
 using BohoTours.Services.Mapping;
+using System;
 
 namespace BohoTours.Web.Areas.Administration.Models.Bookings
 {

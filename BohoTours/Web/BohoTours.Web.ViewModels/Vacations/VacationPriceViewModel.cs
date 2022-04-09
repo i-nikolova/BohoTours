@@ -1,13 +1,9 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
-    using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class VacationPriceViewModel : IMapFrom<VacationPrice>
     {

@@ -1,15 +1,11 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
+    using BohoTours.Data.Common.Constants;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
-    using BohoTours.Data.Common.Constants;
-    using BohoTours.Web.ViewModels.Hotels;
-    using BohoTours.Web.ViewModels.Towns;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class CreateVacationViewModel
     {

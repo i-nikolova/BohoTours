@@ -1,17 +1,13 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-
     using AutoMapper;
     using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class EditHotelViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {
@@ -35,7 +31,7 @@
         public string ImagePath { get; set; }
 
         [Required]
-        [Display(Name="Town")]
+        [Display(Name = "Town")]
         public int TownId { get; set; }
 
         public string TownName { get; set; }

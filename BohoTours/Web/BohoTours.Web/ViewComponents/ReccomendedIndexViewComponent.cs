@@ -4,10 +4,6 @@ using BohoTours.Web.ViewModels.Home;
 using BohoTours.Web.ViewModels.Hotels;
 using BohoTours.Web.ViewModels.Vacations;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BohoTours.Web.ViewComponents
 {

@@ -1,15 +1,12 @@
 ﻿namespace BohoTours.Services.Data.Bookings
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
     using BohoTours.Web.ViewModels.Bookings;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class BookingsService : IBookingsService
     {

@@ -1,13 +1,10 @@
 ﻿namespace BohoTours.Services.Data.Transports
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class TransportsService : ITransportsService
     {

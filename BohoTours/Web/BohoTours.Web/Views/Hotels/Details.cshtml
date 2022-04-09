@@ -1,4 +1,5 @@
-﻿@model BohoTours.Web.ViewModels.Hotels.SingleHotelViewModel
+﻿@using BohoTours.Web.ViewComponents
+@model BohoTours.Web.ViewModels.Hotels.SingleHotelViewModel
 
 <div class="blog-single gray-bg">
     <div class="container">
@@ -188,7 +189,11 @@
 
                 @if (Model.HasReviews)
                 {
-                    @await Component.InvokeAsync("HotelRatings", Model.Id)
+                    @await Component.InvokeAsync("HotelRatings", new HotelRatingsViewComponent.InvokeRequest()
+                    {
+                        HotelName = Model.Name,
+                        Id = Model.Id
+                    })
                 }
                 else
                 {

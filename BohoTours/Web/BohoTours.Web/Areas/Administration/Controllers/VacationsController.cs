@@ -1,27 +1,17 @@
-﻿using BohoTours.Web.Areas.Administration.Controllers;
-
-namespace BohoTours.Web.Areas.Administration.Controllers
+﻿namespace BohoTours.Web.Areas.Administration.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using BohoTours.Data.Models;
     using BohoTours.Services.Data;
-    using BohoTours.Services.Data.Hotels;
     using BohoTours.Services.Data.Transports;
     using BohoTours.Services.Data.Vacations;
     using BohoTours.Web.ViewModels.Continenst;
     using BohoTours.Web.ViewModels.Countries;
-    using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Towns;
     using BohoTours.Web.ViewModels.Transports;
     using BohoTours.Web.ViewModels.Vacations;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.AspNetCore.Routing;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class VacationsController : AdministrationController
     {

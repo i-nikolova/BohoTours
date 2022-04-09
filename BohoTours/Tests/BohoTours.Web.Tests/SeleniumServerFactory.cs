@@ -1,14 +1,13 @@
 ﻿namespace BohoTours.Web.Tests
 {
-    using System;
-    using System.Linq;
-
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Hosting.Server.Features;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.AspNetCore.TestHost;
     using Microsoft.Extensions.DependencyInjection;
+    using System;
+    using System.Linq;
 
     public sealed class SeleniumServerFactory<TStartup> : WebApplicationFactory<TStartup>
         where TStartup : class

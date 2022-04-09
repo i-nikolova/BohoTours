@@ -1,11 +1,10 @@
 ﻿namespace BohoTours.Data.Models
 {
+    using BohoTours.Data.Common.Constants;
+    using BohoTours.Data.Common.Models;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-
-    using BohoTours.Data.Common.Constants;
-    using BohoTours.Data.Common.Models;
 
     public class Town : BaseDeletableModel<int>
     {

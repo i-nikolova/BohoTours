@@ -1,12 +1,10 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
 namespace BohoTours.Data.Models
 {
+    using BohoTours.Data.Common.Models;
+    using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
-
-    using BohoTours.Data.Common.Models;
-
-    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

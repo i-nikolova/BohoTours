@@ -1,13 +1,10 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class VacationRatingsViewModel : IMapFrom<Vacation>, IHaveCustomMappings
     {

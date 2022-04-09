@@ -1,14 +1,12 @@
 ﻿namespace BohoTours.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using BohoTours.Services.Data;
     using BohoTours.Web.ViewModels.Towns;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [Route("api/[controller]")]
     [ApiController]

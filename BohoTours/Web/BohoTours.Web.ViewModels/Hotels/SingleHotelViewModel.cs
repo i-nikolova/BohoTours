@@ -1,14 +1,11 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
     using BohoTours.Web.ViewModels.Feedbacks;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class SingleHotelViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {

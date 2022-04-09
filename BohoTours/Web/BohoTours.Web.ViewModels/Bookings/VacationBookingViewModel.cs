@@ -1,10 +1,9 @@
 ﻿namespace BohoTours.Web.Areas.Administration.Models.Bookings
 {
-    using System;
-
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using System;
 
     public class VacationBookingViewModel : IMapFrom<VacationBooking>, IHaveCustomMappings
     {

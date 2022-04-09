@@ -1,14 +1,12 @@
 ﻿namespace BohoTours.Data.Seeding
 {
+    using BohoTours.Common;
+    using BohoTours.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using BohoTours.Common;
-    using BohoTours.Data.Models;
-
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
 
     internal class RolesSeeder : ISeeder
     {

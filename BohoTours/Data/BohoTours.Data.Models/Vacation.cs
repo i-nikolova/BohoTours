@@ -1,13 +1,10 @@
 ﻿namespace BohoTours.Data.Models
 {
-    using System;
+    using BohoTours.Data.Common.Constants;
+    using BohoTours.Data.Common.Models;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Text;
-
-    using BohoTours.Data.Common.Constants;
-    using BohoTours.Data.Common.Models;
 
     public class Vacation : BaseDeletableModel<int>
     {

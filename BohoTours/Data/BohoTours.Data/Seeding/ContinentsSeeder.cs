@@ -1,10 +1,9 @@
 ﻿namespace BohoTours.Data.Seeding
 {
+    using BohoTours.Data.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using BohoTours.Data.Models;
 
     public class ContinentsSeeder : ISeeder
     {

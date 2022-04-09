@@ -1,11 +1,5 @@
 ﻿namespace BohoTours.Services.Data.Hotels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Data.CloudinaryHelper;
@@ -13,7 +7,10 @@
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using CloudinaryDotNet;
-    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class HotelsService : IHotelsService
     {
@@ -62,7 +59,7 @@
 
         public int GetCount()
         {
-            return this.hotelsRepository.AllAsNoTracking().Where(x => !x.IsDeleted).Count();
+            return this.hotelsRepository.AllAsNoTracking().Count(x => !x.IsDeleted);
         }
 
         public T GetById<T>(int id)
@@ -163,46 +160,46 @@
                         }
                     }
                 }
-
-                hotel.Name = hotelModel.Name;
-                hotel.LAT = hotelModel.LAT;
-                hotel.LON = hotelModel.LON;
-                hotel.Description = hotelModel.Description;
-                hotel.TownId = hotelModel.TownId;
-
-                var hotelImages = this.hotelImagesRepository.All().Where(x => x.HotelId == hotelModel.Id);
-
-                foreach (var image in hotelModel.ImportedImages)
-                {
-                    var existingImage = this.hotelImagesRepository.All().FirstOrDefault(x => x.HotelId == hotelModel.Id && image.Id == x.Id);
-
-                    if (image.IsImageDeleted)
-                    {
-                        this.hotelImagesRepository.Delete(existingImage);
-                    }
-                }
-
-                if (hotelModel.Images != null)
-                {
-                    var imageUrls = await CloudinaryExtension.UploadAsync(this.cloudinary, hotelModel.Images);
-                    foreach (var item in imageUrls.Select(x => new HotelImages() { ImageUrl = x }))
-                    {
-                        hotel.HotelImages.Add(item);
-                    }
-                }
-
-                if (hotelModel.ImportedImages.Where(x => !x.IsImageDeleted).ToList().Count == 1)
-                {
-                    hotel.ImagePath = hotelModel.ImportedImages.FirstOrDefault(x => !x.IsImageDeleted).ImageUrl;
-                }
-                else
-                {
-                    hotel.ImagePath = hotelModel.ImagePath;
-                }
-
-                this.hotelsRepository.Update(hotel);
-                await this.hotelsRepository.SaveChangesAsync();
             }
+
+            hotel.Name = hotelModel.Name;
+            hotel.LAT = hotelModel.LAT;
+            hotel.LON = hotelModel.LON;
+            hotel.Description = hotelModel.Description;
+            hotel.TownId = hotelModel.TownId;
+
+            var hotelImages = this.hotelImagesRepository.All().Where(x => x.HotelId == hotelModel.Id);
+
+            foreach (var image in hotelModel.ImportedImages)
+            {
+                var existingImage = this.hotelImagesRepository.All().FirstOrDefault(x => x.HotelId == hotelModel.Id && image.Id == x.Id);
+
+                if (image.IsImageDeleted)
+                {
+                    this.hotelImagesRepository.Delete(existingImage);
+                }
+            }
+
+            if (hotelModel.Images != null)
+            {
+                var imageUrls = await CloudinaryExtension.UploadAsync(this.cloudinary, hotelModel.Images);
+                foreach (var item in imageUrls.Select(x => new HotelImages() { ImageUrl = x }))
+                {
+                    hotel.HotelImages.Add(item);
+                }
+            }
+
+            if (hotelModel.ImportedImages.Where(x => !x.IsImageDeleted).ToList().Count == 1)
+            {
+                hotel.ImagePath = hotelModel.ImportedImages.FirstOrDefault(x => !x.IsImageDeleted).ImageUrl;
+            }
+            else
+            {
+                hotel.ImagePath = hotelModel.ImagePath;
+            }
+
+            this.hotelsRepository.Update(hotel);
+            await this.hotelsRepository.SaveChangesAsync();
         }
 
         public async Task Delete(int hotelId)
@@ -244,9 +241,9 @@
             await this.hotelsRepository.SaveChangesAsync();
         }
 
-        public T GetReviews<T>(int hotelId)
+        public IEnumerable<T> GetReviews<T>(int hotelId)
         {
-            return this.hotelsRepository.AllAsNoTracking().Where(x => x.Id == hotelId && !x.IsDeleted).To<T>().FirstOrDefault();
+            return this.hotelRatingsRepository.AllAsNoTracking().Where(x => x.HotelId == hotelId && !x.IsDeleted).To<T>().ToList();
         }
 
         public (string HotelName, string RoomType) GetRoomInfo(int id)
@@ -274,8 +271,6 @@
                     recommendedVacations.Add(list[index]);
                 }
             }
-
-
 
             return recommendedVacations;
         }

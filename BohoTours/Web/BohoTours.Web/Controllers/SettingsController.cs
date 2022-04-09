@@ -1,14 +1,12 @@
 ﻿namespace BohoTours.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Data;
     using BohoTours.Web.ViewModels.Settings;
-
     using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     public class SettingsController : BaseController
     {

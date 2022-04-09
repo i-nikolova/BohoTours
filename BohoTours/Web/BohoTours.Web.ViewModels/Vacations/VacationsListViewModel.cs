@@ -1,13 +1,10 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
+    using BohoTours.Data.Models;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
-    using BohoTours.Data.Models;
-    using BohoTours.Web.ViewModels.Vacations;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class VacationsListViewModel
     {

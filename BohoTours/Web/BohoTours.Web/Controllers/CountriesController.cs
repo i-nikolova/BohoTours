@@ -1,18 +1,12 @@
 ﻿namespace BohoTours.Web.Controllers
 {
-    using System;
+    using BohoTours.Services.Data;
+    using BohoTours.Web.ViewModels.Countries;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using BohoTours.Data.Models;
-    using BohoTours.Services.Data;
-    using BohoTours.Web.ViewModels.Continenst;
-    using BohoTours.Web.ViewModels.Countries;
-    using BohoTours.Web.ViewModels.Hotels;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
-    using Microsoft.Extensions.Options;
 
     [Route("api/[controller]")]
     [ApiController]

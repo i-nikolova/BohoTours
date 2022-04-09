@@ -1,12 +1,9 @@
 ﻿namespace BohoTours.Services.Data.Hotels
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore.Migrations.Operations;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IHotelsService
     {
@@ -30,7 +27,7 @@
 
         Task AddFeedback(FeedbackViewModel feedback);
 
-        T GetReviews<T>(int hotelId);
+        IEnumerable<T> GetReviews<T>(int hotelId);
 
         (string HotelName, string RoomType) GetRoomInfo(int id);
     }

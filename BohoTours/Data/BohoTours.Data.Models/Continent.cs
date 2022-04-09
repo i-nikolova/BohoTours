@@ -1,10 +1,8 @@
 ﻿namespace BohoTours.Data.Models
 {
-    using System.Collections.Specialized;
-    using System.ComponentModel.DataAnnotations;
-
     using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Common.Models;
+    using System.ComponentModel.DataAnnotations;
 
     public class Continent : BaseDeletableModel<int>
     {

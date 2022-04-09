@@ -1,12 +1,9 @@
 ﻿namespace BohoTours.Services.Data.Vacations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Threading.Tasks;
-
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Vacations;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IVacationsService
     {

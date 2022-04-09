@@ -1,10 +1,5 @@
 ﻿namespace BohoTours.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using BohoTours.Services.Data.Bookings;
     using BohoTours.Services.Data.Hotels;
     using BohoTours.Services.Data.Vacations;
@@ -13,6 +8,8 @@
     using BohoTours.Web.ViewModels.Vacations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     public class BookingsController : BaseController
     {
@@ -44,7 +41,7 @@
         }
 
         [Authorize]
-        public IActionResult AddHotelBooking([FromQuery]int modelId, int modelPriceId, int price, DateTime startDate)
+        public IActionResult AddHotelBooking([FromQuery] int modelId, int modelPriceId, int price, DateTime startDate)
         {
             var (hotelName, roomType) = this.hotelsService.GetRoomInfo(modelPriceId);
 

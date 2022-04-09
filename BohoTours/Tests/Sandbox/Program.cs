@@ -1,10 +1,5 @@
 ﻿namespace Sandbox
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Threading.Tasks;
-
     using BohoTours.Data;
     using BohoTours.Data.Common;
     using BohoTours.Data.Common.Repositories;
@@ -13,13 +8,15 @@
     using BohoTours.Data.Seeding;
     using BohoTours.Services.Data;
     using BohoTours.Services.Messaging;
-
     using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Threading.Tasks;
 
     public static class Program
     {

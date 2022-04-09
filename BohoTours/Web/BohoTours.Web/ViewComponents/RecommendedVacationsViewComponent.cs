@@ -1,9 +1,5 @@
 ﻿namespace BohoTours.Web.ViewComponents
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     using BohoTours.Services.Data.Vacations;
     using BohoTours.Web.ViewModels.Vacations;

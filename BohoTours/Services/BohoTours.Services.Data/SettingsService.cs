@@ -1,11 +1,10 @@
 ﻿namespace BohoTours.Services.Data
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class SettingsService : ISettingsService
     {

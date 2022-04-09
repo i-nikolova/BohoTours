@@ -1,11 +1,5 @@
 ﻿namespace BohoTours.Services.Data.Vacations
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Data.CloudinaryHelper;
@@ -14,6 +8,10 @@
     using BohoTours.Web.ViewModels.Vacations;
     using CloudinaryDotNet;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class VacationsService : IVacationsService
     {

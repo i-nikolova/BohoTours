@@ -1,11 +1,8 @@
 ﻿namespace BohoTours.Web.ViewModels.Bookings
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
-
     using BohoTours.Data.Common.Constants;
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class CreateHotelBookingViewModel
     {

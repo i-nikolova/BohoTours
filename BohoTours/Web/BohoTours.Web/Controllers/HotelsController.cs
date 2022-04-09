@@ -1,25 +1,15 @@
 ﻿namespace BohoTours.Web.Controllers
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Threading.Tasks;
-
-    using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Data;
     using BohoTours.Services.Data.Hotels;
-    using BohoTours.Web.ViewModels.Continenst;
-    using BohoTours.Web.ViewModels.Countries;
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using BohoTours.Web.ViewModels.Towns;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Routing;
-    using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class HotelsController : Controller
     {
@@ -129,7 +119,17 @@
 
         public IActionResult Reviews(int id)
         {
-            return this.View(this.hotelsService.GetReviews<HotelRatingsViewModel>(id));
+            var ratings = this.hotelsService.GetReviews<HotelRatingsReviewViewModel>(id);
+
+            var ratingInfo = new HotelRatingsViewModel()
+            {
+                HotelName = this.hotelsService.GetById<SingleHotelViewModel>(id).Name,
+                HotelRatingsReviews = ratings.ToList(),
+                Rating = ratings.ToList().Average(x => x.Rating),
+                RatingsCount = ratings.Count(),
+            };
+
+            return this.View(ratingInfo);
         }
     }
 }
