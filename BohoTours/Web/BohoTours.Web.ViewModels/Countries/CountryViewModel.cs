@@ -1,6 +1,5 @@
 ﻿namespace BohoTours.Web.ViewModels.Countries
 {
-
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
 

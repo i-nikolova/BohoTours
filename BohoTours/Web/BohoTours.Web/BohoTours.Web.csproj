@@ -8,8 +8,73 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="SeedDbJson\continents.json" />
+    <Content Remove="SeedDbJson\countries.json" />
+    <Content Remove="SeedDbJson\hotels.json" />
+    <Content Remove="SeedDbJson\hotelsBookings.json" />
+    <Content Remove="SeedDbJson\hotelsImages.json" />
+    <Content Remove="SeedDbJson\hotelsRatings.json" />
+    <Content Remove="SeedDbJson\hotelsRoom.json" />
+    <Content Remove="SeedDbJson\hotelsRoomPrices.json" />
+    <Content Remove="SeedDbJson\towns.json" />
+    <Content Remove="SeedDbJson\transport.json" />
+    <Content Remove="SeedDbJson\vacationPrices.json" />
+    <Content Remove="SeedDbJson\vacations.json" />
+    <Content Remove="SeedDbJson\vacationsBookings.json" />
+    <Content Remove="SeedDbJson\vacationsImages.json" />
+    <Content Remove="SeedDbJson\vacationsRatings.json" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SeedDbJson\continents.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\countries.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\hotels.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\hotelsBookings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\hotelsImages.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\hotelsRatings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\hotelsRoom.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\hotelsRoomPrices.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\towns.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\transport.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\vacationPrices.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\vacations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\vacationsBookings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\vacationsImages.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="SeedDbJson\vacationsRatings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

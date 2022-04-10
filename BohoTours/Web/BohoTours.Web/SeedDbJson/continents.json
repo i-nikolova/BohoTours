@@ -1,0 +1,34 @@
+[
+	{
+		"Name": "Europe",
+		"ContinentCode": "EU",
+		"IsDeleted": false,
+		"DeletedOn": null,
+		"CreatedOn": "2022-04-10T14:42:56.84014",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "Asia",
+		"ContinentCode": "AS",
+		"IsDeleted": false,
+		"DeletedOn": null,
+		"CreatedOn": "2022-04-10T14:42:56.8402425",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "North america",
+		"ContinentCode": "NA",
+		"IsDeleted": false,
+		"DeletedOn": null,
+		"CreatedOn": "2022-04-10T14:42:56.8402554",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "South america",
+		"ContinentCode": "SA",
+		"IsDeleted": false,
+		"DeletedOn": null,
+		"CreatedOn": "2022-04-10T14:42:56.8402558",
+		"ModifiedOn": null
+	}
+]

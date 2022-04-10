@@ -1,0 +1,68 @@
+[
+	{
+		"Name": "Sofia",
+		"CountryId": 1,
+		"Country": null,
+		"Hotels": [],
+		"Vacations": [],
+		"IsDeleted": false,
+		"DeletedOn": null,		
+		"CreatedOn": "2022-04-10T14:43:00.7407791",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "Beijing",
+		"CountryId": 2,
+		"Country": null,
+		"Hotels": [],
+		"Vacations": [],
+		"IsDeleted": false,
+		"DeletedOn": null,		
+		"CreatedOn": "2022-04-10T00:00:00",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "Ottawa",
+		"CountryId": 3,
+		"Country": null,
+		"Hotels": [],
+		"Vacations": [],
+		"IsDeleted": false,
+		"DeletedOn": null,		
+		"CreatedOn": "2022-04-10T00:00:00",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "Lima",
+		"CountryId": 4,
+		"Country": null,
+		"Hotels": [],
+		"Vacations": [],
+		"IsDeleted": false,
+		"DeletedOn": null,		
+		"CreatedOn": "2022-04-10T00:00:00",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "Plovdiv",
+		"CountryId": 1,
+		"Country": null,
+		"Hotels": [],
+		"Vacations": [],
+		"IsDeleted": false,
+		"DeletedOn": null,		
+		"CreatedOn": "2022-04-10T00:00:00",
+		"ModifiedOn": null
+	},
+	{
+		"Name": "Burgas",
+		"CountryId": 1,
+		"Country": null,
+		"Hotels": [],
+		"Vacations": [],
+		"IsDeleted": false,
+		"DeletedOn": null,		
+		"CreatedOn": "2022-04-10T00:00:00",
+		"ModifiedOn": null
+	}
+]

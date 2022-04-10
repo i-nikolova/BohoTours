@@ -1,11 +1,12 @@
 ﻿namespace BohoTours.Services.Data.Hotels
 {
-    using BohoTours.Data.Common.Repositories;
-    using BohoTours.Data.Models;
-    using BohoTours.Services.Mapping;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using BohoTours.Data.Common.Repositories;
+    using BohoTours.Data.Models;
+    using BohoTours.Services.Mapping;
 
     public class TownsService : ITownsService
     {

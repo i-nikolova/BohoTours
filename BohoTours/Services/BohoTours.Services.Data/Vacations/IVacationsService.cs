@@ -1,9 +1,10 @@
 ﻿namespace BohoTours.Services.Data.Vacations
 {
-    using BohoTours.Web.ViewModels.Feedbacks;
-    using BohoTours.Web.ViewModels.Vacations;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using BohoTours.Web.ViewModels.Feedbacks;
+    using BohoTours.Web.ViewModels.Vacations;
 
     public interface IVacationsService
     {
@@ -25,6 +26,6 @@
 
         Task AddFeedback(FeedbackViewModel feedback);
 
-        T GetReviews<T>(int hotelId);
+        IEnumerable<T> GetReviews<T>(int hotelId);
     }
 }

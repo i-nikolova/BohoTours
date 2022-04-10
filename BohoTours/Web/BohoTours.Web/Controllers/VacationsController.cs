@@ -1,5 +1,10 @@
 ﻿namespace BohoTours.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BohoTours.Data.Models;
     using BohoTours.Services.Data;
     using BohoTours.Services.Data.Transports;
@@ -12,26 +17,18 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Routing;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class VacationsController : Controller
     {
         private readonly ICountriesService countriesService;
-        private readonly IContinentsService continentsService;
         private readonly ITownsService townsService;
-        private readonly ITransportsService transportsService;
         private readonly IVacationsService vacationsService;
 
-        public VacationsController(IContinentsService continentsService, ICountriesService countriesService, ITownsService townsService, IVacationsService vacationsService, ITransportsService transportsService)
+        public VacationsController(ICountriesService countriesService, ITownsService townsService, IVacationsService vacationsService)
         {
-            this.continentsService = continentsService;
             this.countriesService = countriesService;
             this.townsService = townsService;
             this.vacationsService = vacationsService;
-            this.transportsService = transportsService;
         }
 
         public IActionResult All(int country, int[] towns, string searchTerm, Sorting sorting, int id = 1)
@@ -53,7 +50,7 @@
                 };
             }
 
-            if (country != 0 || !string.IsNullOrWhiteSpace(searchTerm) || towns.Count() != 0)
+            if (country != 0 || !string.IsNullOrWhiteSpace(searchTerm) || towns.Length != 0)
             {
                 if (country != 0)
                 {
@@ -67,7 +64,7 @@
                         x.CountryName.ToLower().Contains(searchTerm.ToLower())).AsQueryable();
                 }
 
-                if (towns.Count() != 0)
+                if (towns.Length != 0)
                 {
                     var townsListSelected = new List<string>();
 
@@ -150,7 +147,19 @@
 
         public IActionResult Reviews(int id)
         {
-            return this.View(this.vacationsService.GetReviews<VacationRatingsViewModel>(id));
+            var ratings = this.vacationsService.GetReviews<VacationRatingsReviewViewModel>(id);
+
+            var ratingInfo = new VacationRatingsViewModel
+            {
+                HotelName = this.vacationsService.GetById<SingleVacationViewModel>(id)
+                    .Name,
+                HotelRatingsReviews = ratings.ToList(),
+                Rating = ratings.ToList()
+                    .Average(x => x.Rating),
+                RatingsCount = ratings.Count(),
+            };
+
+            return this.View(ratingInfo);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace BohoTours.Web.ViewComponents
 {
+    using System.Linq;
 
     using BohoTours.Services.Data.Vacations;
     using BohoTours.Web.ViewModels.Vacations;
@@ -14,10 +15,27 @@
             this.vacationsService = vacationsService;
         }
 
-        public IViewComponentResult Invoke(int id)
+        public IViewComponentResult Invoke(InvokeRequest request)
         {
-            var rating = this.vacationsService.GetReviews<VacationRatingsViewModel>(id);
-            return this.View(rating);
+            var ratings = this.vacationsService.GetReviews<VacationRatingsReviewViewModel>(request.Id);
+
+            var ratingInfo = new VacationRatingsViewModel()
+            {
+                Id = request.Id,
+                HotelName = request.VacationName,
+                HotelRatingsReviews = ratings.ToList(),
+                Rating = ratings.ToList().Average(x => x.Rating),
+                RatingsCount = ratings.Count(),
+            };
+
+            return this.View(ratingInfo);
+        }
+
+        public class InvokeRequest
+        {
+            public int Id { get; set; }
+
+            public string VacationName { get; set; }
         }
     }
 }

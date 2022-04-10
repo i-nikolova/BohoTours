@@ -1,10 +1,10 @@
-﻿using BohoTours.Web.Areas.Administration.Models.Bookings;
-
-namespace BohoTours.Web.Areas.Administration.Controllers
+﻿namespace BohoTours.Web.Areas.Administration.Controllers
 {
-    using BohoTours.Services.Data.Bookings;
-    using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+
+    using BohoTours.Services.Data.Bookings;
+    using BohoTours.Web.Areas.Administration.Models.Bookings;
+    using Microsoft.AspNetCore.Mvc;
 
     public class BookingsController : AdministrationController
     {

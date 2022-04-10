@@ -1,13 +1,14 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     using AutoMapper;
     using BohoTours.Data.Common.Constants;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public class EditHotelViewModel : IMapFrom<Hotel>, IHaveCustomMappings
     {

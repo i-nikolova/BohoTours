@@ -1,9 +1,11 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
-    using System.Linq;
 
     public class VacationInListViewModel : IMapFrom<Vacation>, IHaveCustomMappings
     {
@@ -21,9 +23,11 @@
 
         public string TownsVisited { get; set; }
 
-        public decimal VacationMinPrice { get; set; }
+        public decimal VacationMinPrice => this.VacationPrices.Min(x => x.Price);
 
-        public string TrasportType { get; set; }
+        public ICollection<VacationPriceViewModel> VacationPrices { get; set; }
+
+        public string TransportType { get; set; }
 
         public byte Duration { get; set; }
 
@@ -31,8 +35,8 @@
         {
             configuration.CreateMap<Vacation, VacationInListViewModel>()
                 .ForMember(x => x.TownsVisited, opt => opt.MapFrom(x => string.Join(", ", x.TownsVisited.Select(t => t.Name))))
-                .ForMember(x => x.VacationMinPrice, opt => opt.MapFrom(x => x.VacationPrices.Select(x => x.Price).Min()))
-                .ForMember(x => x.TrasportType, opt => opt.MapFrom(x => x.Transport.TransportType));
+                .ForMember(x => x.TransportType, opt => opt.MapFrom(x => x.Transport.TransportType))
+                .ForMember(x => x.CountryName, opt => opt.MapFrom(x => x.Country.Name));
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
-
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
 

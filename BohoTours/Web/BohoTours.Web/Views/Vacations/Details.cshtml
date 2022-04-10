@@ -1,4 +1,6 @@
-﻿@model BohoTours.Web.ViewModels.Vacations.SingleVacationViewModel
+﻿@using BohoTours.Web.ViewModels.Vacations
+@using BohoTours.Web.ViewComponents
+@model BohoTours.Web.ViewModels.Vacations.SingleVacationViewModel
 
 <div class="blog-single gray-bg">
     <div class="container">
@@ -123,77 +125,80 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-4 m-15px-tb blog-aside">
-                <div class="widget widget-author">
-                    <div class="widget-title">
-                        <h3>About the vacation</h3>
+        <div class="col-lg-4 m-15px-tb blog-aside">
+            <div class="widget widget-author">
+                <div class="widget-title">
+                    <h3>About the vacation</h3>
+                </div>
+                <div class="widget-body">
+                    <div class="mb-3">
+                        <strong>Destinations:</strong> @Model.TownsVisited
                     </div>
-                    <div class="widget-body">
-                        <div class="mb-3">
-                            <strong>Destinations:</strong> @Model.TownsVisited
-                        </div>
-                        <div class="mb-3">
-                            <strong>Country:</strong> @Model.CountryName
-                        </div>
-                        <div class="mb-3">
-                            <strong>Duration:</strong> @Model.Duration days
-                        </div>
-                        <div class="mb-3">
-                            @if (Model.TrasportType == "Plane")
-                            {
-                                <strong>Transport:</strong> <i class="fas fa-plane text-info"></i> @Model.TrasportType
-                            }
-                            else
-                            {
-                                <strong>Transport:</strong> <i class="fas fa-bus text-info"></i> @Model.TrasportType
-                            }
-
-                        </div>
-                        <div align="center">
-                            Prices from:
-                            <h2>$@Model.VacationMinPrice</h2>
-                            <div>  <a class="btn btn-primary" asp-controller="Bookings" asp-action="BookVacation" asp-route-id="@Model.Id">Book now</a></div>
-                        </div>
-                        <hr />
-                        @if (this.User.IsInRole("Administrator"))
+                    <div class="mb-3">
+                        <strong>Country:</strong> @Model.CountryName
+                    </div>
+                    <div class="mb-3">
+                        <strong>Duration:</strong> @Model.Duration days
+                    </div>
+                    <div class="mb-3">
+                        @if (Model.TransportType == "Plane")
                         {
-                            <div class="row m-2">
-                                <a class="btn btn-success col-5  ml-3 mr-3" asp-area="Administration" asp-controller="Vacations" asp-action="Edit" asp-route-id="@Model.Id">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                    Edit
-                                </a>
-                                <button type="button" class="btn btn-danger col-5 mr-3" data-id="@Model.Id" data-toggle="modal" data-target="#deleteHotelModal"><i class="fa fa-trash-o"></i> Delete</button>
-
-                            </div>
+                            <strong>Transport:</strong> <i class="fas fa-plane text-info"></i> @Model.TransportType
+                        }
+                        else
+                        {
+                            <strong>Transport:</strong> <i class="fas fa-bus text-info"></i> @Model.TransportType
                         }
 
-                        <!-- Town Modal -->
-                        <div class="modal fade" data-backdrop="false" role="dialog" id="deleteHotelModal" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Create Town</h5>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="myForm" asp-area="Administration" asp-controller="Vacations" asp-action="Delete">
-                                            Are you sure you want to delete this hotel?
-                                            <input hidden name="id" value="@Model.Id" />
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeTownCreate">Close</button>
-                                        <button type="button" class="btn btn-danger" id="modalDeleteButton">Yes, delete it</button>
-                                    </div>
+                    </div>
+                    <div align="center">
+                        Prices from:
+                        <h2>$@Model.VacationMinPrice</h2>
+                        <div>  <a class="btn btn-primary" asp-controller="Bookings" asp-action="BookVacation" asp-route-id="@Model.Id">Book now</a></div>
+                    </div>
+                    <hr />
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                        <div class="row m-2">
+                            <a class="btn btn-success col-5  ml-3 mr-3" asp-area="Administration" asp-controller="Vacations" asp-action="Edit" asp-route-id="@Model.Id">
+                                <i class="fa fa-pencil-square-o"></i>
+                                Edit
+                            </a>
+                            <button type="button" class="btn btn-danger col-5 mr-3" data-id="@Model.Id" data-toggle="modal" data-target="#deleteHotelModal"><i class="fa fa-trash-o"></i> Delete</button>
+
+                        </div>
+                    }
+
+                    <!-- Town Modal -->
+                    <div class="modal fade" data-backdrop="false" role="dialog" id="deleteHotelModal" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Create Town</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="myForm" asp-area="Administration" asp-controller="Vacations" asp-action="Delete">
+                                        Are you sure you want to delete this hotel?
+                                        <input hidden name="id" value="@Model.Id" />
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeTownCreate">Close</button>
+                                    <button type="button" class="btn btn-danger" id="modalDeleteButton">Yes, delete it</button>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
             @if (Model.HasReviews)
             {
-                @await Component.InvokeAsync("VacationRatings", Model.Id)
+                @await Component.InvokeAsync("VacationRatings", new VacationRatingsViewComponent.InvokeRequest()
+                {
+                    VacationName = Model.Name,
+                    Id = Model.Id
+                })
             }
             else
             {

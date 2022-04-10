@@ -1,5 +1,10 @@
 ﻿namespace BohoTours.Services.Data.Vacations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Data.CloudinaryHelper;
@@ -8,25 +13,23 @@
     using BohoTours.Web.ViewModels.Vacations;
     using CloudinaryDotNet;
     using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class VacationsService : IVacationsService
     {
         private readonly IDeletableEntityRepository<Vacation> vacationsRepostory;
         private readonly IDeletableEntityRepository<VacationPrice> vacationPricesRepository;
         private readonly IDeletableEntityRepository<VacationImages> vacationImagesRepository;
+        private readonly IDeletableEntityRepository<VacationRatings> vacationRatingsRepository;
         private readonly IDeletableEntityRepository<Town> townsRepository;
 
         private readonly Cloudinary cloudinary;
 
-        public VacationsService(IDeletableEntityRepository<Vacation> vacationsRepostory, Cloudinary cloudinary, IDeletableEntityRepository<VacationPrice> vacationPricesRepository, IDeletableEntityRepository<VacationImages> vacationImagesRepository = null, IDeletableEntityRepository<Town> townsRepository = null)
+        public VacationsService(IDeletableEntityRepository<Vacation> vacationsRepostory, Cloudinary cloudinary, IDeletableEntityRepository<VacationPrice> vacationPricesRepository, IDeletableEntityRepository<VacationRatings> vacationRatingsRepository, IDeletableEntityRepository<VacationImages> vacationImagesRepository = null, IDeletableEntityRepository<Town> townsRepository = null)
         {
             this.vacationsRepostory = vacationsRepostory;
             this.cloudinary = cloudinary;
             this.vacationPricesRepository = vacationPricesRepository;
+            this.vacationRatingsRepository = vacationRatingsRepository;
             this.vacationImagesRepository = vacationImagesRepository;
             this.townsRepository = townsRepository;
         }
@@ -226,9 +229,9 @@
             await this.vacationsRepostory.SaveChangesAsync();
         }
 
-        public T GetReviews<T>(int hotelId)
+        public IEnumerable<T> GetReviews<T>(int hotelId)
         {
-            return this.vacationsRepostory.AllAsNoTracking().Where(x => x.Id == hotelId && !x.IsDeleted).To<T>().FirstOrDefault();
+            return this.vacationRatingsRepository.AllAsNoTracking().Where(x => x.VacationId == hotelId && !x.IsDeleted).To<T>().ToList();
         }
 
         public IEnumerable<T> GetRecommendedByContinent<T>(string continetnCode)
@@ -237,8 +240,7 @@
             var list = this.vacationsRepostory.AllAsNoTracking().Where(x => x.Country.Continent.ContinentCode == continetnCode).To<T>().ToArray();
             var recommendedVacations = new List<T>();
 
-
-            if (list.Count() > 0)
+            if (list.Any())
             {
                 for (int i = 0; i < 2; i++)
                 {

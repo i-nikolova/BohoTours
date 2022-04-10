@@ -28,8 +28,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
-                              new ContinentsSeeder(),
-                              new ScrapingSeeder(),
+                              new DbSeeder(),
                               new UserSeeder(),
                           };
 

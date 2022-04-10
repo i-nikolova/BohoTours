@@ -69,13 +69,13 @@
                     <h4 class="card-title">@item.Name</h4>
                     <small class="text-muted cat">
                         <i class="far fa-clock text-info"></i> @item.Duration days
-                        @if (item.TrasportType == "Plane")
+                        @if (item.TransportType == "Plane")
                         {
-                            <i class="fas fa-plane text-info"></i> @item.TrasportType
+                            <i class="fas fa-plane text-info"></i> @item.TransportType
                         }
                         else
                         {
-                            <i class="fas fa-bus text-info"></i> @item.TrasportType
+                            <i class="fas fa-bus text-info"></i> @item.TransportType
                         }
                         <i class="far fa-map text-info"></i> @item.CountryName
                     </small>

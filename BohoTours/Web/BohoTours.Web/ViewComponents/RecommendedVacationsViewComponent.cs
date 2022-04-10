@@ -1,6 +1,5 @@
 ﻿namespace BohoTours.Web.ViewComponents
 {
-
     using BohoTours.Services.Data.Vacations;
     using BohoTours.Web.ViewModels.Vacations;
     using Microsoft.AspNetCore.Mvc;

@@ -1,5 +1,8 @@
 ﻿namespace BohoTours.Web.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+
     using BohoTours.Services.Data.Bookings;
     using BohoTours.Services.Data.Hotels;
     using BohoTours.Services.Data.Vacations;
@@ -8,8 +11,6 @@
     using BohoTours.Web.ViewModels.Vacations;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using System;
-    using System.Threading.Tasks;
 
     public class BookingsController : BaseController
     {

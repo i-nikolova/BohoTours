@@ -1,10 +1,11 @@
-﻿using AutoMapper;
-using BohoTours.Data.Models;
-using BohoTours.Services.Mapping;
-using System;
-
-namespace BohoTours.Web.Areas.Administration.Models.Bookings
+﻿namespace BohoTours.Web.Areas.Administration.Models.Bookings
 {
+    using System;
+
+    using AutoMapper;
+    using BohoTours.Data.Models;
+    using BohoTours.Services.Mapping;
+
     public class HotelBookingViewModel : IMapFrom<HotelBooking>, IHaveCustomMappings
     {
         public int Id { get; set; }

@@ -1,11 +1,12 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
-    using BohoTours.Data.Common.Constants;
-    using BohoTours.Data.Models;
-    using BohoTours.Services.Mapping;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
+    using BohoTours.Data.Common.Constants;
+    using BohoTours.Data.Models;
+    using BohoTours.Services.Mapping;
 
     public class HotelRoomViewModel : IMapFrom<HotelRoom>
     {

@@ -2,7 +2,6 @@
 {
     using BohoTours.Common;
     using BohoTours.Web.Controllers;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

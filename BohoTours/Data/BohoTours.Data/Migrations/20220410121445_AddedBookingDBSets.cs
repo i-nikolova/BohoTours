@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BohoTours.Data.Migrations
+﻿namespace BohoTours.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddedBookingDBSets : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

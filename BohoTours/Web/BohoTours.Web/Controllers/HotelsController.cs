@@ -1,5 +1,8 @@
 ﻿namespace BohoTours.Web.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BohoTours.Data.Models;
     using BohoTours.Services.Data;
     using BohoTours.Services.Data.Hotels;
@@ -8,22 +11,16 @@
     using BohoTours.Web.ViewModels.Towns;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class HotelsController : Controller
     {
         private readonly IHotelsService hotelsService;
         private readonly ITownsService townsService;
-        private readonly ICountriesService countriesService;
-        private readonly IContinentsService continentsService;
 
-        public HotelsController(IHotelsService hotelsService, ITownsService townsService, ICountriesService countriesService, IContinentsService continentsService)
+        public HotelsController(IHotelsService hotelsService, ITownsService townsService)
         {
             this.hotelsService = hotelsService;
             this.townsService = townsService;
-            this.countriesService = countriesService;
-            this.continentsService = continentsService;
         }
 
         public IActionResult All(string town, string searchTerm, Sorting sorting, int id = 1)

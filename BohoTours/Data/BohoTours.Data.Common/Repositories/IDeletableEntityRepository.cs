@@ -1,7 +1,8 @@
 ﻿namespace BohoTours.Data.Common.Repositories
 {
-    using BohoTours.Data.Common.Models;
     using System.Linq;
+
+    using BohoTours.Data.Common.Models;
 
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity

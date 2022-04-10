@@ -1,9 +1,10 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
-    using BohoTours.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
+    using BohoTours.Data.Models;
 
     public class HotelsListViewModel
     {

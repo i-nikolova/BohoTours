@@ -1,20 +1,14 @@
 ﻿namespace BohoTours.Web.ViewComponents
 {
+    using System.Linq;
+
     using BohoTours.Services.Data.Hotels;
     using BohoTours.Web.ViewModels.Hotels;
     using Microsoft.AspNetCore.Mvc;
-    using System.Linq;
 
     public class HotelRatingsViewComponent : ViewComponent
     {
         private readonly IHotelsService hotelsService;
-
-        public class InvokeRequest
-        {
-            public int Id { get; set; }
-
-            public string HotelName { get; set; }
-        }
 
         public HotelRatingsViewComponent(IHotelsService hotelsService)
         {
@@ -35,6 +29,13 @@
             };
 
             return this.View(ratingInfo);
+        }
+
+        public class InvokeRequest
+        {
+            public int Id { get; set; }
+
+            public string HotelName { get; set; }
         }
     }
 }

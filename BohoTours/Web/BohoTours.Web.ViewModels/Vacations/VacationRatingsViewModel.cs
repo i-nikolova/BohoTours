@@ -1,10 +1,11 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class VacationRatingsViewModel : IMapFrom<Vacation>, IHaveCustomMappings
     {
@@ -16,7 +17,7 @@
 
         public int RatingsCount { get; set; }
 
-        public IEnumerable<VacationRatingsReviewViewModel> HotelRatingsReviews { get; set; } = new HashSet<VacationRatingsReviewViewModel>();
+        public ICollection<VacationRatingsReviewViewModel> HotelRatingsReviews { get; set; } = new HashSet<VacationRatingsReviewViewModel>();
 
         public void CreateMappings(IProfileExpression configuration)
         {

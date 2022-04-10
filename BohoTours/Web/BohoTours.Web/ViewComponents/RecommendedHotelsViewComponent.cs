@@ -1,6 +1,5 @@
 ﻿namespace BohoTours.Web.Views.Shared.Components.Hotels
 {
-
     using BohoTours.Services.Data.Hotels;
     using BohoTours.Web.ViewModels.Hotels;
     using Microsoft.AspNetCore.Mvc;

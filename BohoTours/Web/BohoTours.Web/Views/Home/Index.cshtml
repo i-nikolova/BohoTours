@@ -23,25 +23,25 @@
             <ul class="nav nav-pills tm-tabs-links">
                 <li class="tm-tab-link-li">
                     <a class="tm-tab-link" data-toggle="list" href="#namerica" role="tab">
-                        <img src="img/south-america.png" alt="Image" class="img-fluid">
+                        <img src="~/img/south-america.png" alt="Image" class="img-fluid">
                         North America
                     </a>
                 </li>
                 <li class="tm-tab-link-li">
                     <a class="tm-tab-link" data-toggle="list" href="#samerica" role="tab">
-                        <img src="img/north-america.png" alt="Image" class="img-fluid">
+                        <img src="~/img/north-america.png" alt="Image" class="img-fluid">
                         South America
                     </a>
                 </li>
                 <li class="tm-tab-link-li active">
                     <a class="tm-tab-link" data-toggle="list" href="#europe" role="tab">
-                        <img src="img/europe.png" alt="Image" class="img-fluid">
+                        <img src="~/img/europe.png" alt="Image" class="img-fluid">
                         Europe
                     </a>
                 </li>
                 <li class="tm-tab-link-li">
                     <a class="tm-tab-link" data-toggle="list" href="#asia" role="tab">
-                        <img src="img/asia.png" alt="Image" class="img-fluid">
+                        <img src="~/img/asia.png" alt="Image" class="img-fluid">
                         Asia
                     </a>
                 </li>
@@ -58,21 +58,21 @@
             <div class="tab-pane" id="samerica" role="tabpanel">
                 <!-- Current Active Tab WITH "show active" classes in DIV tag -->
                 <div class="tm-recommended-place-wrap">
-                    @await Component.InvokeAsync("ReccomendedIndex", "SA")
+                  @await Component.InvokeAsync("ReccomendedIndex", "SA")
 
                 </div>
             </div>
             <div class="tab-pane active" id="europe" role="tabpanel">
                 <!-- Current Active Tab WITH "show active" classes in DIV tag -->
                 <div class="tm-recommended-place-wrap">
-                    @await Component.InvokeAsync("ReccomendedIndex", "EU")
+                @await Component.InvokeAsync("ReccomendedIndex", "EU")
 
                 </div>
             </div>
             <div class="tab-pane" id="asia" role="tabpanel">
                 <!-- Current Active Tab WITH "show active" classes in DIV tag -->
                 <div>
-                    @await Component.InvokeAsync("ReccomendedIndex", "AS")
+                  @await Component.InvokeAsync("ReccomendedIndex", "AS")
 
                 </div>
             </div>

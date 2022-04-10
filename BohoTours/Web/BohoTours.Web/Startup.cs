@@ -1,5 +1,9 @@
 ﻿namespace BohoTours.Web
 {
+    using System.IO;
+    using System.Reflection;
+    using System.Text.Json;
+
     using BohoTours.Data;
     using BohoTours.Data.Common;
     using BohoTours.Data.Common.Repositories;
@@ -22,7 +26,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using System.Reflection;
 
     public class Startup
     {

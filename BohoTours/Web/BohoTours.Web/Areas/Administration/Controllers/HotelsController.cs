@@ -1,17 +1,17 @@
-﻿using BohoTours.Web.Areas.Administration.Controllers;
-
-namespace BohoTours.Web.Areas.Administration
+﻿namespace BohoTours.Web.Areas.Administration
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BohoTours.Services.Data;
     using BohoTours.Services.Data.Hotels;
+    using BohoTours.Web.Areas.Administration.Controllers;
     using BohoTours.Web.ViewModels.Continenst;
     using BohoTours.Web.ViewModels.Countries;
     using BohoTours.Web.ViewModels.Hotels;
     using BohoTours.Web.ViewModels.Towns;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class HotelsController : AdministrationController
     {

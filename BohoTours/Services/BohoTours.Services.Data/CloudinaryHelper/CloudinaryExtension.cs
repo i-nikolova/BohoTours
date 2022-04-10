@@ -1,17 +1,18 @@
 ﻿namespace BohoTours.Services.Data.CloudinaryHelper
 {
-    using CloudinaryDotNet;
-    using CloudinaryDotNet.Actions;
-    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
+
+    using CloudinaryDotNet;
+    using CloudinaryDotNet.Actions;
+    using Microsoft.AspNetCore.Http;
 
     public class CloudinaryExtension
     {
         public static async Task<List<string>> UploadAsync(Cloudinary cloudinary, ICollection<IFormFile> images)
         {
-            List<string> list = new List<string>();
+            List<string> list = new();
 
             foreach (var image in images)
             {

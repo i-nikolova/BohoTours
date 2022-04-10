@@ -1,5 +1,10 @@
 ﻿namespace BohoTours.Services.Data.Hotels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BohoTours.Data.Common.Repositories;
     using BohoTours.Data.Models;
     using BohoTours.Services.Data.CloudinaryHelper;
@@ -7,10 +12,7 @@
     using BohoTours.Web.ViewModels.Feedbacks;
     using BohoTours.Web.ViewModels.Hotels;
     using CloudinaryDotNet;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
     public class HotelsService : IHotelsService
     {
@@ -250,7 +252,7 @@
         {
             var room = this.hotelRoomsPricesRepository.AllAsNoTracking().Where(x => x.Id == id).Select(x => new
             {
-                RoomType = x.Room.RoomType,
+                x.Room.RoomType,
                 HotelName = x.Room.Hotel.Name,
             }).FirstOrDefault();
 
@@ -260,7 +262,7 @@
         public IEnumerable<T> GetRecommendedByContinent<T>(string continetnCode)
         {
             var random = new Random();
-            var list = this.hotelsRepository.AllAsNoTracking().Where(x => x.Town.Country.Continent.ContinentCode == continetnCode).To<T>().ToArray();
+            var list = this.hotelsRepository.AllAsNoTracking().Include(x => x.Town).Where(x => x.Town.Country.Continent.ContinentCode == continetnCode).To<T>().ToArray();
             var recommendedVacations = new List<T>();
 
             if (list.Count() > 0)

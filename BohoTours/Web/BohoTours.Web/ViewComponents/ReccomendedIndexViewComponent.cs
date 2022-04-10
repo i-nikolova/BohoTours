@@ -1,12 +1,12 @@
-﻿using BohoTours.Services.Data.Hotels;
-using BohoTours.Services.Data.Vacations;
-using BohoTours.Web.ViewModels.Home;
-using BohoTours.Web.ViewModels.Hotels;
-using BohoTours.Web.ViewModels.Vacations;
-using Microsoft.AspNetCore.Mvc;
-
-namespace BohoTours.Web.ViewComponents
+﻿namespace BohoTours.Web.ViewComponents
 {
+    using BohoTours.Services.Data.Hotels;
+    using BohoTours.Services.Data.Vacations;
+    using BohoTours.Web.ViewModels.Home;
+    using BohoTours.Web.ViewModels.Hotels;
+    using BohoTours.Web.ViewModels.Vacations;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ReccomendedIndexViewComponent : ViewComponent
     {
         private readonly IHotelsService hotelsService;

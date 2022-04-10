@@ -1,9 +1,10 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
-    using BohoTours.Data.Models;
-    using BohoTours.Services.Mapping;
     using System;
     using System.ComponentModel.DataAnnotations;
+
+    using BohoTours.Data.Models;
+    using BohoTours.Services.Mapping;
 
     public class HotelRoomPriceViewModel : IMapFrom<HotelRoomPrice>
     {

@@ -1,11 +1,13 @@
 ﻿namespace BohoTours.Web.ViewModels.Vacations
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.CompilerServices;
+
     using AutoMapper;
     using BohoTours.Data.Models;
     using BohoTours.Services.Mapping;
     using BohoTours.Web.ViewModels.Feedbacks;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class SingleVacationViewModel : IMapFrom<Vacation>, IHaveCustomMappings
     {
@@ -23,9 +25,9 @@
 
         public string TownsVisited { get; set; }
 
-        public decimal VacationMinPrice { get; set; }
+        public decimal VacationMinPrice => this.VacationPrices.Min(x => x.Price);
 
-        public string TrasportType { get; set; }
+        public string TransportType { get; set; }
 
         public byte Duration { get; set; }
 
@@ -42,9 +44,8 @@
             configuration.CreateMap<Vacation, SingleVacationViewModel>()
                 .ForMember(x => x.TownsVisited, opt => opt.MapFrom(x => string.Join(", ", x.TownsVisited.Select(t => t.Name))))
                 .ForMember(m => m.HasReviews, opt => opt.MapFrom(x => x.VacationsRatings.Count > 0))
-                .ForMember(x => x.VacationMinPrice, opt => opt.MapFrom(x => x.VacationPrices.Select(x => x.Price).Min()))
                 .ForMember(m => m.Images, opt => opt.MapFrom(hi => hi.VacationImages.Where(x => !x.IsDeleted).Select(x => x.ImageUrl)))
-                .ForMember(x => x.TrasportType, opt => opt.MapFrom(x => x.Transport.TransportType));
+                .ForMember(x => x.TransportType, opt => opt.MapFrom(x => x.Transport.TransportType));
         }
     }
 }

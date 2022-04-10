@@ -1,9 +1,10 @@
 ﻿namespace BohoTours.Data.Models
 {
-    using BohoTours.Data.Common.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using BohoTours.Data.Common.Models;
 
     public class HotelRoomPrice : BaseDeletableModel<int>
     {

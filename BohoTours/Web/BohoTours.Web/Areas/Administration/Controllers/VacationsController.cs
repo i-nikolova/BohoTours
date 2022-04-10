@@ -1,5 +1,8 @@
 ﻿namespace BohoTours.Web.Areas.Administration.Controllers
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
     using BohoTours.Services.Data;
     using BohoTours.Services.Data.Transports;
     using BohoTours.Services.Data.Vacations;
@@ -10,8 +13,6 @@
     using BohoTours.Web.ViewModels.Vacations;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class VacationsController : AdministrationController
     {

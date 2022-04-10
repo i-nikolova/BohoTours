@@ -1,10 +1,11 @@
 ﻿namespace BohoTours.Web.ViewModels.Hotels
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     using BohoTours.Data.Common.Constants;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
 
     public class CreateHotelViewModel
     {

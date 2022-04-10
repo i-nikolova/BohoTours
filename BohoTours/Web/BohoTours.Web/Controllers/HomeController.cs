@@ -1,8 +1,9 @@
 ﻿namespace BohoTours.Web.Controllers
 {
+    using System.Diagnostics;
+
     using BohoTours.Web.ViewModels;
     using Microsoft.AspNetCore.Mvc;
-    using System.Diagnostics;
 
     public class HomeController : BaseController
     {

@@ -1,9 +1,10 @@
 ﻿namespace BohoTours.Services.Data.Hotels
 {
-    using BohoTours.Web.ViewModels.Feedbacks;
-    using BohoTours.Web.ViewModels.Hotels;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using BohoTours.Web.ViewModels.Feedbacks;
+    using BohoTours.Web.ViewModels.Hotels;
 
     public interface IHotelsService
     {
