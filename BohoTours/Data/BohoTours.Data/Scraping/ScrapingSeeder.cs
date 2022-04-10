@@ -1,9 +1,5 @@
 ﻿namespace BohoTours.Data.Scraping
 {
-    using AngleSharp.Html.Parser;
-    using BohoTours.Data.Models;
-    using BohoTours.Data.Seeding;
-    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -11,6 +7,11 @@
     using System.Text;
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
+
+    using AngleSharp.Html.Parser;
+    using BohoTours.Data.Models;
+    using BohoTours.Data.Seeding;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class ScrapingSeeder : ISeeder
     {

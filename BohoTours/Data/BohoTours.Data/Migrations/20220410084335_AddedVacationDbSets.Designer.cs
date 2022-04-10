@@ -4,14 +4,16 @@ using BohoTours.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BohoTours.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220410084335_AddedVacationDbSets")]
+    partial class AddedVacationDbSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,7 +321,7 @@ namespace BohoTours.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("HotelBookings");
+                    b.ToTable("HotelBooking");
                 });
 
             modelBuilder.Entity("BohoTours.Data.Models.HotelImages", b =>
@@ -689,7 +691,7 @@ namespace BohoTours.Data.Migrations
 
                     b.HasIndex("VacationPriceId");
 
-                    b.ToTable("VacationBookings");
+                    b.ToTable("VacationBooking");
                 });
 
             modelBuilder.Entity("BohoTours.Data.Models.VacationImages", b =>

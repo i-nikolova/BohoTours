@@ -1,11 +1,13 @@
 ﻿namespace BohoTours.Data.Seeding
 {
-    using BohoTours.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using BohoTours.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+
     using static BohoTours.Common.GlobalConstants;
 
     public class UserSeeder : ISeeder

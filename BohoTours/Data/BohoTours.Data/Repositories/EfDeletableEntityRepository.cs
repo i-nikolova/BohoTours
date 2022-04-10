@@ -1,10 +1,11 @@
 ﻿namespace BohoTours.Data.Repositories
 {
+    using System;
+    using System.Linq;
+
     using BohoTours.Data.Common.Models;
     using BohoTours.Data.Common.Repositories;
     using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Linq;
 
     public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity

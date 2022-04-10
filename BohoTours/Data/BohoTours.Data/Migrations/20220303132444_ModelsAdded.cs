@@ -1,7 +1,8 @@
 ﻿namespace BohoTours.Data.Migrations
 {
-    using Microsoft.EntityFrameworkCore.Migrations;
     using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
 
     public partial class ModelsAdded : Migration
     {

@@ -1,8 +1,9 @@
 ﻿namespace BohoTours.Data
 {
+    using System.Linq;
+
     using BohoTours.Data.Common.Models;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
 
     internal static class EntityIndexesConfiguration
     {

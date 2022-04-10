@@ -1,14 +1,15 @@
 ﻿namespace BohoTours.Data
 {
-    using BohoTours.Data.Common.Models;
-    using BohoTours.Data.Models;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
+
+    using BohoTours.Data.Common.Models;
+    using BohoTours.Data.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -45,6 +46,14 @@
         public DbSet<HotelRatings> HotelRatings { get; set; }
 
         public DbSet<VacationRatings> VacationRatings { get; set; }
+
+        public DbSet<Vacation> Vacations { get; set; }
+
+        public DbSet<Transport> Transports { get; set; }
+
+        public DbSet<HotelBooking> HotelBookings { get; set; }
+
+        public DbSet<VacationBooking> VacationBookings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

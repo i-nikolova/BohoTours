@@ -1,9 +1,10 @@
 ﻿namespace BohoTours.Data
 {
-    using BohoTours.Data.Common;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Threading.Tasks;
+
+    using BohoTours.Data.Common;
+    using Microsoft.EntityFrameworkCore;
 
     public class DbQueryRunner : IDbQueryRunner
     {

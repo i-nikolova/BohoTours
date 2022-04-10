@@ -1,11 +1,12 @@
 ﻿namespace BohoTours.Data.Seeding
 {
-    using BohoTours.Data.Scraping;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using BohoTours.Data.Scraping;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
